@@ -1,4 +1,5 @@
 
+import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,31 +15,34 @@ import ShoppingList from "./pages/ShoppingList";
 import Recipes from "./pages/Recipes";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
+import { AuthGuard } from "./components/AuthGuard";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AppProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/passo/:stepId" element={<StepPage />} />
-            <Route path="/perfil" element={<Profile />} />
-            <Route path="/diario" element={<Diary />} />
-            <Route path="/lista-compras" element={<ShoppingList />} />
-            <Route path="/receitas" element={<Recipes />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </AppProvider>
-  </QueryClientProvider>
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <AppProvider>
+        <TooltipProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/" element={<AuthGuard><Index /></AuthGuard>} />
+              <Route path="/passo/:stepId" element={<AuthGuard><StepPage /></AuthGuard>} />
+              <Route path="/perfil" element={<AuthGuard><Profile /></AuthGuard>} />
+              <Route path="/diario" element={<AuthGuard><Diary /></AuthGuard>} />
+              <Route path="/lista-compras" element={<AuthGuard><ShoppingList /></AuthGuard>} />
+              <Route path="/receitas" element={<AuthGuard><Recipes /></AuthGuard>} />
+              <Route path="/admin" element={<AuthGuard requireAdmin={true}><Admin /></AuthGuard>} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Toaster />
+            <Sonner />
+          </BrowserRouter>
+        </TooltipProvider>
+      </AppProvider>
+    </QueryClientProvider>
+  </React.StrictMode>
 );
 
 export default App;
