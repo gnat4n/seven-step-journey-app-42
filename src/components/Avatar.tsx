@@ -1,31 +1,38 @@
 
 import React from 'react';
+import { useApp } from '@/context/AppContext';
 
 type AvatarProps = {
   status: number; // 1-7 based on progress
   size?: 'sm' | 'md' | 'lg' | 'xl';
   withAnimation?: boolean;
+  showName?: boolean;
 };
 
 export const Avatar: React.FC<AvatarProps> = ({ 
   status = 1, 
   size = 'md',
-  withAnimation = false
+  withAnimation = false,
+  showName = true
 }) => {
+  const { state } = useApp();
+  const { currentUser } = state;
+  const userName = currentUser?.name || 'Usuária';
+
   // Mapping avatar status to visual characteristics
   const getAvatarState = (status: number) => {
     switch (status) {
       case 1:
         return {
           expression: 'cansada',
-          bgColor: 'bg-gray-100',
+          bgColor: 'bg-gradient-to-br from-gray-200 to-gray-100',
           textColor: 'text-gray-600',
           emoji: '😔'
         };
       case 2:
         return {
           expression: 'mais leve',
-          bgColor: 'bg-brand-100',
+          bgColor: 'bg-gradient-to-br from-brand-200 to-brand-100',
           textColor: 'text-gray-600',
           emoji: '🙂'
         };
@@ -33,7 +40,7 @@ export const Avatar: React.FC<AvatarProps> = ({
       case 4:
         return {
           expression: 'confiante',
-          bgColor: 'bg-brand-200',
+          bgColor: 'bg-gradient-to-br from-brand-300 to-brand-200',
           textColor: 'text-brand-600',
           emoji: '😊'
         };
@@ -41,21 +48,21 @@ export const Avatar: React.FC<AvatarProps> = ({
       case 6:
         return {
           expression: 'forte',
-          bgColor: 'bg-brand-300',
+          bgColor: 'bg-gradient-to-br from-brand-500 to-brand-300',
           textColor: 'text-brand-700',
           emoji: '💪'
         };
       case 7:
         return {
           expression: 'radiante',
-          bgColor: 'bg-brand-500',
+          bgColor: 'bg-gradient-to-br from-brand-600 to-brand-400',
           textColor: 'text-white',
           emoji: '✨'
         };
       default:
         return {
           expression: 'iniciante',
-          bgColor: 'bg-gray-100',
+          bgColor: 'bg-gradient-to-br from-gray-200 to-gray-100',
           textColor: 'text-gray-600',
           emoji: '😊'
         };
@@ -101,6 +108,7 @@ export const Avatar: React.FC<AvatarProps> = ({
       <div 
         className={`
           ${wrapperClass} rounded-full flex items-center justify-center ${bgColor} ${textColor}
+          shadow-lg border border-white/20
           ${withAnimation ? 'transition-all duration-500 hover:scale-110' : ''}
           ${status === 7 ? 'animate-pulse' : ''}
         `}
@@ -109,8 +117,8 @@ export const Avatar: React.FC<AvatarProps> = ({
           {emoji}
         </span>
       </div>
-      {size === 'lg' || size === 'xl' ? (
-        <p className={`mt-2 font-medium ${textColor}`}>Ana {expression}</p>
+      {showName && (size === 'lg' || size === 'xl') ? (
+        <p className={`mt-2 font-medium ${textColor}`}>{userName} {expression}</p>
       ) : null}
     </div>
   );

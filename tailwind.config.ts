@@ -65,6 +65,7 @@ export default {
 				},
 				// 7Steps custom colors
 				brand: {
+					50: '#f8f1fe',
 					100: '#fce1e4', // light pink
 					200: '#e7d9f7', // light purple
 					300: '#d6bcfa', // soft purple
@@ -141,6 +142,26 @@ export default {
 						opacity: '1'
 					}
 				},
+				'pulse-ring': {
+					'0%': { transform: 'scale(0.8)', opacity: '0.8' },
+					'50%': { transform: 'scale(1.2)', opacity: '0.4' },
+					'100%': { transform: 'scale(0.8)', opacity: '0.8' }
+				},
+				'float': {
+					'0%': { transform: 'translateY(0px)' },
+					'50%': { transform: 'translateY(-5px)' },
+					'100%': { transform: 'translateY(0px)' }
+				},
+				'bounce-soft': {
+					'0%, 100%': { 
+						transform: 'translateY(0)',
+						animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)'
+					},
+					'50%': { 
+						transform: 'translateY(-15px)',
+						animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)'
+					}
+				},
 				'confetti': {
 					'0%': { transform: 'translateY(0) rotate(0)' },
 					'100%': { transform: 'translateY(500px) rotate(720deg)' }
@@ -152,6 +173,9 @@ export default {
 				'fade-in': 'fade-in 0.3s ease-out',
 				'fade-out': 'fade-out 0.3s ease-out',
 				'scale-in': 'scale-in 0.2s ease-out',
+				'pulse-ring': 'pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite',
+				'float': 'float 3s ease-in-out infinite',
+				'bounce-soft': 'bounce-soft 1.5s infinite',
 				'confetti': 'confetti 1.5s ease-out forwards'
 			}
 		}
