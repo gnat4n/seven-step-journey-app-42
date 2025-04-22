@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
+import { DiagnosticForm } from './exercises/DiagnosticForm';
+import { StopTimer } from './exercises/StopTimer';
 
 type StepContentProps = {
   step: JourneyStep;
@@ -17,13 +19,27 @@ export const StepContent: React.FC<StepContentProps> = ({
   onComplete,
   stepCompleted
 }) => {
-  // Function to render HTML content safely
   const renderHtml = (html: string) => {
     return { __html: html };
   };
 
-  // Render exercise based on type
   const renderExercise = (exercise: Exercise) => {
+    let ExerciseComponent;
+
+    // Map exercise types to components
+    if (step.id === 1) { // Only for Step 1
+      switch (exercise.type) {
+        case 'form':
+          ExerciseComponent = DiagnosticForm;
+          break;
+        case 'challenge':
+          ExerciseComponent = StopTimer;
+          break;
+        default:
+          return null;
+      }
+    }
+
     return (
       <Card key={exercise.id} className="mb-4">
         <CardHeader className="pb-2">
@@ -36,14 +52,14 @@ export const StepContent: React.FC<StepContentProps> = ({
           </div>
         </CardHeader>
         <CardContent>
-          <p className="mb-4">{exercise.content}</p>
-          
-          {/* This is a simplified version - in a real app, we would have interactive 
-              components based on exercise.type (quiz, dragdrop, diary, etc) */}
-          <div className="border border-dashed border-gray-300 rounded-md p-4 text-center text-muted-foreground">
-            <p>Interação do tipo <strong>{exercise.type}</strong></p>
-            <p className="text-sm mt-1">Na versão completa, aqui estaria um componente interativo baseado no tipo do exercício.</p>
-          </div>
+          {ExerciseComponent ? (
+            <ExerciseComponent onComplete={() => {}} />
+          ) : (
+            <div className="border border-dashed border-gray-300 rounded-md p-4 text-center text-muted-foreground">
+              <p>Interação do tipo <strong>{exercise.type}</strong></p>
+              <p className="text-sm mt-1">Em desenvolvimento...</p>
+            </div>
+          )}
         </CardContent>
       </Card>
     );

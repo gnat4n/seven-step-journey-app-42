@@ -1,7 +1,7 @@
-
 export interface User {
   id: string;
   email: string;
+  name?: string;  // Making it optional for backward compatibility
   xp_total: number;
   current_step: number;
   avatar_status: number;

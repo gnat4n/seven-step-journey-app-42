@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useApp } from '@/context/AppContext';
 import { AuthGuard } from '@/components/AuthGuard';
@@ -47,7 +46,7 @@ const Profile = () => {
                   
                   <div className="flex-1">
                     <h2 className="text-xl font-medium mb-1">
-                      {currentUser?.email?.split('@')[0]}
+                      {currentUser?.name || currentUser?.email?.split('@')[0]}
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
                       {currentUser?.email}

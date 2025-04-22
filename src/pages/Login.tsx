@@ -2,10 +2,7 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useApp } from '@/context/AppContext';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
+import { FirstLoginForm } from '@/components/FirstLoginForm';
 
 const Login = () => {
   const { state, login } = useApp();
@@ -13,10 +10,16 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [showNameForm, setShowNameForm] = useState(false);
 
-  // If user is already logged in, redirect to dashboard
-  if (currentUser) {
+  // If user is already logged in and has a name, redirect to dashboard
+  if (currentUser?.name) {
     return <Navigate to="/" replace />;
+  }
+
+  // If user is logged in but doesn't have a name, show name form
+  if (currentUser && !currentUser.name) {
+    return <FirstLoginForm />;
   }
 
   const handleSubmit = async (e: React.FormEvent) => {

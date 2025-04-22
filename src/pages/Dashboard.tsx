@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '@/context/AppContext';
@@ -21,26 +20,22 @@ const Dashboard = () => {
       <MainNav />
       <main className="container py-6">
         <div className="flex flex-col items-center space-y-8">
-          {/* Welcome & Avatar */}
           <div className="text-center">
             <h1 className="text-3xl font-serif font-bold text-brand-700 mb-2">
               Sua Jornada 7Steps
             </h1>
             <p className="text-muted-foreground mb-6">
-              Bem-vinda de volta, {currentUser?.email?.split('@')[0]}!
+              Bem-vinda de volta, {currentUser?.name || currentUser?.email?.split('@')[0]}!
             </p>
             <Avatar status={currentUser?.avatar_status || 1} size="xl" withAnimation />
           </div>
           
-          {/* Progress Bar */}
           <div className="w-full max-w-3xl">
             <JourneyProgress />
           </div>
           
-          {/* XP Bar */}
           <XPBar currentXP={currentUser?.xp_total || 0} />
           
-          {/* Continue Journey Button */}
           <Button 
             className="bg-brand-500 hover:bg-brand-600 text-lg py-6 px-8"
             onClick={() => navigate(`/passo/${currentUser?.current_step}`)}
@@ -50,7 +45,6 @@ const Dashboard = () => {
               : 'Continuar Minha Jornada'}
           </Button>
           
-          {/* Quick Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-3xl">
             <Card>
               <CardContent className="p-4">
@@ -84,7 +78,6 @@ const Dashboard = () => {
             </Card>
           </div>
           
-          {/* Unlocked Achievements */}
           <div className="w-full max-w-3xl">
             <AchievementsList achievements={achievements} />
           </div>

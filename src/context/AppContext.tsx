@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { AppState, User, JourneyStep, Achievement, DiaryEntry } from '@/types';
 import { mockSteps } from '@/data/steps';
@@ -23,7 +22,8 @@ type AppContextType = {
   addDiaryEntry: (entry: Omit<DiaryEntry, 'id' | 'user_id'>) => void;
   unlockAchievement: (achievementId: number) => void;
   addXP: (amount: number) => void;
-  fetchUsers: () => void; // For admin panel
+  fetchUsers: () => void;
+  updateUser: (user: User) => Promise<void>;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -291,7 +291,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }));
   };
 
-  // Helper function to show confetti animation
+  const updateUser = async (updatedUser: User) => {
+    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+    setState(prev => ({
+      ...prev,
+      currentUser: updatedUser
+    }));
+  };
+
   const showConfetti = () => {
     const colors = ['#fce1e4', '#e7d9f7', '#d6bcfa', '#9b87f5', '#7E69AB'];
     const container = document.createElement('div');
@@ -334,6 +341,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         unlockAchievement,
         addXP,
         fetchUsers,
+        updateUser,
       }}
     >
       {children}
