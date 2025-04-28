@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '@/context/AppContext';
@@ -17,14 +16,11 @@ const Login = () => {
   const navigate = useNavigate();
   const { isInstallable, installApp } = usePwaInstall();
 
-  // Check if user is already logged in
   useEffect(() => {
     if (state.currentUser) {
       if (!state.currentUser.name) {
-        // User needs to set their name
         navigate('/first-login');
       } else {
-        // User is already logged in and has a name
         navigate('/');
       }
     }
@@ -56,7 +52,6 @@ const Login = () => {
     }
   };
 
-  // Need for FirstLoginForm
   if (state.currentUser && !state.currentUser.name) {
     return <FirstLoginForm />;
   }
