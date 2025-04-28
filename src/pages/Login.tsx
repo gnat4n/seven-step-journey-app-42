@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '@/context/AppContext';
@@ -60,7 +61,11 @@ const Login = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-brand-50 to-white p-4">
       <div className="w-full max-w-md">
         <div className="mb-6 text-center">
-          <h1 className="text-3xl font-serif font-bold text-brand-700 mb-2">7Steps</h1>
+          <img 
+            src="/lovable-uploads/8802b8ff-8b05-41f8-82cd-7ef9c9355371.png" 
+            alt="7Steps Logo" 
+            className="h-12 mx-auto mb-4"
+          />
           <p className="text-muted-foreground">Bloqueie a Fome em 7 Passos</p>
         </div>
 

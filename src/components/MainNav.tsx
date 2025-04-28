@@ -42,8 +42,12 @@ export const MainNav: React.FC = () => {
       <div className="container flex h-16 items-center justify-between py-4">
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <Link to="/" className="font-serif text-2xl font-bold text-brand-700">
-            7Steps
+          <Link to="/" className="flex items-center gap-2">
+            <img 
+              src="/lovable-uploads/8802b8ff-8b05-41f8-82cd-7ef9c9355371.png" 
+              alt="7Steps Logo" 
+              className="h-8"
+            />
           </Link>
         </div>
         
