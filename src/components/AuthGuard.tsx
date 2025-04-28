@@ -21,6 +21,9 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
       navigate('/login');
     } else if (!isLoading && requireAdmin && currentUser && !currentUser.is_admin) {
       navigate('/');
+    } else if (!isLoading && currentUser && !currentUser.name && window.location.pathname !== '/first-login') {
+      // Add this condition to redirect to first-login if the user doesn't have a name
+      navigate('/first-login');
     }
   }, [currentUser, isLoading, navigate, requireAdmin]);
 

@@ -1,8 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '@/context/AppContext';
-import { FirstLoginForm } from '@/components/FirstLoginForm';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -46,15 +44,16 @@ const Login = () => {
       const success = await login(email);
       
       if (success) {
-        navigate('/');
+        // We won't navigate here, the useEffect will handle navigation
+        // based on whether the user has a name or not
       }
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (state.currentUser && !state.currentUser.name) {
-    return <FirstLoginForm />;
+  if (state.currentUser) {
+    return null; // The useEffect will handle redirection
   }
 
   return (
