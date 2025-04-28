@@ -1,63 +1,78 @@
 
-import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useApp } from '@/context/AppContext';
 import { FirstLoginForm } from '@/components/FirstLoginForm';
-import { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { usePwaInstall } from '@/hooks/usePwaInstall';
+import { Download } from 'lucide-react';
 
 const Login = () => {
-  const { state, login } = useApp();
-  const { currentUser, isLoading } = state;
   const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
-  const [showNameForm, setShowNameForm] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { state, login } = useApp();
+  const navigate = useNavigate();
+  const { isInstallable, installApp } = usePwaInstall();
 
-  // If user is already logged in and has a name, redirect to dashboard
-  if (currentUser?.name) {
-    return <Navigate to="/" replace />;
-  }
+  // Check if user is already logged in
+  useEffect(() => {
+    if (state.currentUser) {
+      if (!state.currentUser.name) {
+        // User needs to set their name
+        navigate('/first-login');
+      } else {
+        // User is already logged in and has a name
+        navigate('/');
+      }
+    }
+  }, [state.currentUser, navigate]);
 
-  // If user is logged in but doesn't have a name, show name form
-  if (currentUser && !currentUser.name) {
-    return <FirstLoginForm />;
-  }
+  const handleInstall = async () => {
+    try {
+      await installApp();
+    } catch (error) {
+      console.error('Error installing app:', error);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate email
-    if (!email || !email.includes('@')) {
-      setError('Por favor, digite um e-mail válido');
-      return;
-    }
+    if (!email.trim()) return;
     
-    setError('');
-    setIsSubmitting(true);
+    setIsLoading(true);
     
     try {
       const success = await login(email);
-      if (!success) {
-        setError('E-mail não encontrado ou não autorizado');
+      
+      if (success) {
+        navigate('/');
       }
-    } catch (error) {
-      setError('Ocorreu um erro durante o login. Tente novamente.');
-      console.error(error);
     } finally {
-      setIsSubmitting(false);
+      setIsLoading(false);
     }
   };
 
+  // Need for FirstLoginForm
+  if (state.currentUser && !state.currentUser.name) {
+    return <FirstLoginForm />;
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-brand-100/30 px-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-brand-50 to-white p-4">
       <div className="w-full max-w-md">
-        <Card className="border-brand-200 shadow-md">
+        <div className="mb-6 text-center">
+          <h1 className="text-3xl font-serif font-bold text-brand-700 mb-2">7Steps</h1>
+          <p className="text-muted-foreground">Bloqueie a Fome em 7 Passos</p>
+        </div>
+
+        <Card className="border-brand-200 shadow-lg">
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl text-center font-serif text-brand-700">
-              Bem-vinda ao 7Steps
+              Bem-vinda ao 7Steps!
             </CardTitle>
             <CardDescription className="text-center">
               Entre com seu e-mail de compra para acessar sua jornada
@@ -71,37 +86,42 @@ const Login = () => {
                   <Input
                     id="email"
                     type="email"
-                    placeholder="seu@email.com"
+                    placeholder="seu.email@exemplo.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    disabled={isSubmitting}
                     required
                   />
-                  {error && <p className="text-sm text-red-500">{error}</p>}
                 </div>
                 <Button 
                   type="submit" 
                   className="bg-brand-500 hover:bg-brand-600"
-                  disabled={isSubmitting}
+                  disabled={isLoading}
                 >
-                  {isSubmitting ? 'Entrando...' : 'Entrar'}
+                  {isLoading ? 'Entrando...' : 'Entrar'}
                 </Button>
               </div>
             </form>
           </CardContent>
-          <CardFooter className="flex flex-col">
-            <p className="text-xs text-muted-foreground text-center mt-4">
-              Ao entrar, você concorda com nossos termos de serviço e política de privacidade.
-            </p>
-          </CardFooter>
+          {isInstallable && (
+            <CardFooter className="flex flex-col border-t pt-4">
+              <p className="text-sm text-muted-foreground mb-2 text-center">
+                Instale o aplicativo para acesso rápido mesmo offline!
+              </p>
+              <Button 
+                variant="outline" 
+                className="w-full border-brand-300 text-brand-700 hover:bg-brand-100 gap-2"
+                onClick={handleInstall}
+              >
+                <Download size={18} />
+                Instalar como Aplicativo
+              </Button>
+            </CardFooter>
+          )}
         </Card>
-        
-        <div className="mt-4 text-center">
-          <p className="text-sm text-muted-foreground">
-            Para fins de demonstração, você pode usar qualquer e-mail.
-            <br />
-            Para acessar o painel de admin, use um e-mail contendo "admin".
-          </p>
+
+        <div className="mt-8 text-center text-sm text-muted-foreground">
+          <p>Comprou recentemente? Certifique-se de usar o mesmo e-mail da compra.</p>
+          <p className="mt-2">Problemas para acessar? Entre em contato pelo WhatsApp: (11) 99999-9999</p>
         </div>
       </div>
     </div>

@@ -7,6 +7,9 @@
     <title>7Steps - Bloqueie a Fome em 7 Passos</title>
     <meta name="description" content="Aplicativo do Método 7Steps: Bloqueie a Fome em 7 Passos" />
     <meta name="author" content="7Steps" />
+    <meta name="theme-color" content="#a78bfa"/>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
 
     <meta property="og:title" content="7Steps - Bloqueie a Fome em 7 Passos" />
     <meta property="og:description" content="Transforme sua relação com a comida e reconquiste seu corpo sem dietas restritivas" />
@@ -23,5 +26,16 @@
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js').then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, function(err) {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
+    </script>
   </body>
 </html>

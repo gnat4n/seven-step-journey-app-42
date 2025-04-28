@@ -9,7 +9,7 @@ import { CircleCheck, Timer, ArrowRight } from 'lucide-react';
 export const StopTimer = ({ onComplete }: { onComplete: () => void }) => {
   const [step, setStep] = useState(1);
   const [timer, setTimer] = useState(0);
-  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const [isTimerRunning, setIsTimerRunning] = useState(true);
   const [isCompleted, setIsCompleted] = useState(false);
   const { addXP } = useApp();
 
@@ -19,16 +19,19 @@ export const StopTimer = ({ onComplete }: { onComplete: () => void }) => {
     if (isTimerRunning && timer < 100) {
       interval = setInterval(() => {
         setTimer(prev => {
-          if (prev >= 100) {
+          const newValue = prev + 1;
+          if (newValue >= 100) {
             setIsTimerRunning(false);
             return 100;
           }
-          return prev + 1;
+          return newValue;
         });
       }, 60); // Timer speed - higher value = slower timer
     }
     
-    return () => clearInterval(interval);
+    return () => {
+      if (interval) clearInterval(interval);
+    };
   }, [isTimerRunning, timer]);
 
   const handleNextStep = () => {

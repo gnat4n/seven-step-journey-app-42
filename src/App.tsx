@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppProvider } from "@/context/AppContext";
 import Index from "./pages/Dashboard";
 import Login from "./pages/Login";
+import FirstLogin from "./pages/FirstLogin";
 import StepPage from "./pages/StepPage";
 import Profile from "./pages/Profile";
 import Diary from "./pages/Diary";
@@ -27,6 +28,7 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/login" element={<Login />} />
+              <Route path="/first-login" element={<FirstLogin />} />
               <Route path="/" element={<AuthGuard><Index /></AuthGuard>} />
               <Route path="/passo/:stepId" element={<AuthGuard><StepPage /></AuthGuard>} />
               <Route path="/perfil" element={<AuthGuard><Profile /></AuthGuard>} />
