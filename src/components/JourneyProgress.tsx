@@ -17,10 +17,9 @@ export const JourneyProgress: React.FC<JourneyProgressProps> = ({
 
   // Generate journey steps
   const renderSteps = () => {
-    // For compact view, just show current step out of total
     if (compact) {
       return (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 bg-white/50 backdrop-blur-sm p-3 rounded-lg shadow-sm">
           <span className="text-brand-600 font-bold text-lg">{currentStep - 1}</span>
           <span className="text-muted-foreground">/</span>
           <span className="text-muted-foreground">7</span>
@@ -28,9 +27,8 @@ export const JourneyProgress: React.FC<JourneyProgressProps> = ({
       );
     }
 
-    // For full view, show all steps
     return (
-      <div className="flex items-center justify-between w-full max-w-3xl">
+      <div className="flex items-center justify-between w-full max-w-3xl relative">
         {Array.from({ length: 7 }, (_, index) => {
           const stepNumber = index + 1;
           const isCompleted = currentStep > stepNumber;
@@ -38,16 +36,16 @@ export const JourneyProgress: React.FC<JourneyProgressProps> = ({
           const isLocked = currentStep < stepNumber;
           
           const statusClass = isCompleted 
-            ? 'completed' 
+            ? 'completed bg-gradient-to-br from-brand-500 to-brand-600' 
             : isCurrent 
-              ? 'current' 
-              : 'locked';
+              ? 'current bg-white' 
+              : 'locked bg-gray-100';
               
           return (
             <React.Fragment key={stepNumber}>
               {/* Step circle */}
               <div 
-                className={`journey-step ${statusClass}`}
+                className={`journey-step ${statusClass} transform hover:scale-110 transition-all duration-300 shadow-md`}
                 onClick={() => {
                   if (!isLocked && onClick) {
                     onClick(stepNumber);
@@ -58,10 +56,10 @@ export const JourneyProgress: React.FC<JourneyProgressProps> = ({
                 {stepNumber}
               </div>
               
-              {/* Path between steps (except after last step) */}
+              {/* Path between steps */}
               {stepNumber < 7 && (
                 <div 
-                  className={`journey-path ${isCompleted ? 'completed' : 'incomplete'}`}
+                  className={`journey-path transition-all duration-500 ${isCompleted ? 'completed bg-gradient-to-r from-brand-500 to-brand-600' : 'incomplete'}`}
                 ></div>
               )}
             </React.Fragment>
@@ -74,7 +72,9 @@ export const JourneyProgress: React.FC<JourneyProgressProps> = ({
   return (
     <div className="w-full flex flex-col items-center gap-4">
       {!compact && (
-        <h3 className="text-xl font-medium text-brand-700">Sua Jornada</h3>
+        <h3 className="text-xl font-medium bg-gradient-to-r from-brand-600 to-brand-800 bg-clip-text text-transparent">
+          Sua Jornada
+        </h3>
       )}
       {renderSteps()}
     </div>

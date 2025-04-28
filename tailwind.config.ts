@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -165,7 +164,17 @@ export default {
 				'confetti': {
 					'0%': { transform: 'translateY(0) rotate(0)' },
 					'100%': { transform: 'translateY(500px) rotate(720deg)' }
-				}
+				},
+				"gradient-x": {
+					"0%, 100%": {
+						"background-size": "200% 200%",
+						"background-position": "left center",
+					},
+					"50%": {
+						"background-size": "200% 200%",
+						"background-position": "right center",
+					},
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -176,8 +185,16 @@ export default {
 				'pulse-ring': 'pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite',
 				'float': 'float 3s ease-in-out infinite',
 				'bounce-soft': 'bounce-soft 1.5s infinite',
-				'confetti': 'confetti 1.5s ease-out forwards'
-			}
+				'confetti': 'confetti 1.5s ease-out forwards',
+				"gradient-x": "gradient-x 15s ease infinite",
+			},
+			transitionDelay: {
+				'200': '200ms',
+				'300': '300ms',
+				'400': '400ms',
+				'500': '500ms',
+				'600': '600ms',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
