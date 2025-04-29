@@ -23,13 +23,11 @@ export const MainNav: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   
-  // Define main navigation links
+  // Define main navigation links - removendo "Lista de Compras" e "Perfil" como solicitado
   const navLinks = [
     { path: '/', label: 'Dashboard' },
-    { path: '/perfil', label: 'Perfil' },
     { path: '/diario', label: 'Diário' },
     { path: '/adicionais', label: 'Adicionais' },
-    { path: '/lista-compras', label: 'Lista de Compras' },
   ];
   
   // Add recipes link if user has reached step 3
@@ -133,6 +131,9 @@ export const MainNav: React.FC = () => {
                 
                 <DropdownMenuItem asChild>
                   <Link to="/perfil" className="dark:text-white dark:focus:bg-brand-600">Perfil</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/lista-compras" className="dark:text-white dark:focus:bg-brand-600">Lista de Compras</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={logout} className="dark:text-white dark:focus:bg-brand-600">
                   Sair

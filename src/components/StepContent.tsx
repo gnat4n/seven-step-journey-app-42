@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { JourneyStep, Exercise } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -14,7 +15,9 @@ import { ChallengeExercise } from './exercises/ChallengeExercise';
 import { DiaryExercise } from './exercises/DiaryExercise';
 import { FormExercise } from './exercises/FormExercise';
 import { DragDropExercise } from './exercises/DragDropExercise';
-import { CheckCircle, LockKeyhole } from 'lucide-react';
+import { toast } from '@/components/ui/sonner';
+import { CheckCircle, LockKeyhole, ArrowRight } from 'lucide-react';
+import { useApp } from '@/context/AppContext';
 
 type StepContentProps = {
   step: JourneyStep;
@@ -28,6 +31,17 @@ export const StepContent: React.FC<StepContentProps> = ({
   stepCompleted
 }) => {
   const [completedExercises, setCompletedExercises] = useState<number[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { state } = useApp();
+  const navigate = useNavigate();
+  
+  // Use useEffect to initialize completedExercises with exercises that are completed
+  useEffect(() => {
+    if (stepCompleted) {
+      // If the step is completed, mark all exercises as completed
+      setCompletedExercises(step.exercises.map(ex => ex.id));
+    }
+  }, [step, stepCompleted]);
   
   const renderHtml = (html: string) => {
     return { __html: html };
@@ -35,12 +49,27 @@ export const StepContent: React.FC<StepContentProps> = ({
 
   const handleExerciseComplete = (exerciseId: number) => {
     if (!completedExercises.includes(exerciseId)) {
-      setCompletedExercises([...completedExercises, exerciseId]);
+      setCompletedExercises(prev => [...prev, exerciseId]);
     }
   };
 
   const allExercisesCompleted = step.exercises.length > 0 && 
     step.exercises.every(ex => completedExercises.includes(ex.id));
+
+  const handleStepComplete = () => {
+    setIsSubmitting(true);
+    setTimeout(() => {
+      onComplete();
+      setIsSubmitting(false);
+      toast.success(`Passo ${step.id} concluído! Continue sua jornada.`);
+    }, 800);
+  };
+  
+  const handleNextStep = () => {
+    if (state.steps.length > step.id) {
+      navigate(`/passo/${step.id + 1}`);
+    }
+  };
 
   const renderExercise = (exercise: Exercise) => {
     let ExerciseComponent;
@@ -157,7 +186,7 @@ export const StepContent: React.FC<StepContentProps> = ({
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full max-w-3xl mx-auto mb-20">
       <ScrollArea className="prose prose-brand max-w-none mb-8 max-h-[500px] overflow-auto pr-4 dark:prose-invert">
         <div 
           className="p-6 bg-white dark:bg-brand-800/60 rounded-lg shadow-sm border border-brand-100 dark:border-brand-700 transition-all duration-300"
@@ -212,28 +241,41 @@ export const StepContent: React.FC<StepContentProps> = ({
         </div>
       </div>
       
-      <div className="flex justify-center mb-8">
-        <Button 
-          onClick={onComplete} 
-          disabled={stepCompleted || !allExercisesCompleted}
-          className={`
-            ${stepCompleted 
-              ? 'bg-gray-400 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-600 cursor-not-allowed' 
-              : allExercisesCompleted 
-                ? 'bg-brand-500 hover:bg-brand-600 dark:bg-brand-400 dark:hover:bg-brand-300 dark:text-brand-900 animate-pulse' 
-                : 'bg-gray-300 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-700 cursor-not-allowed'
-            }
-            px-8 py-6 text-lg font-medium transition-all duration-300 transform hover:scale-105
-          `}
-          size="lg"
-        >
-          {stepCompleted 
-            ? 'Passo Concluído' 
-            : allExercisesCompleted 
-              ? 'Concluir Passo' 
-              : 'Complete todos os exercícios'
-          }
-        </Button>
+      <div className="flex justify-center gap-4 mb-8">
+        {!stepCompleted ? (
+          <Button 
+            onClick={handleStepComplete} 
+            disabled={!allExercisesCompleted || isSubmitting}
+            className={`
+              ${!allExercisesCompleted 
+                ? 'bg-gray-300 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-700 cursor-not-allowed' 
+                : 'bg-brand-500 hover:bg-brand-600 dark:bg-brand-400 dark:hover:bg-brand-300 dark:text-brand-900 animate-pulse'
+              }
+              px-8 py-6 text-lg font-medium transition-all duration-300 transform hover:scale-105
+            `}
+            size="lg"
+          >
+            {isSubmitting ? 'Concluindo...' : 'Concluir Passo'}
+          </Button>
+        ) : (
+          <>
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-brand-200 hover:bg-brand-50 dark:border-brand-500 dark:hover:bg-brand-700 px-8 py-6"
+            >
+              Rever este passo
+            </Button>
+            
+            <Button 
+              onClick={handleNextStep}
+              className="bg-brand-500 hover:bg-brand-600 dark:bg-brand-400 dark:hover:bg-brand-300 dark:text-brand-900 px-8 py-6 text-lg font-medium transition-all duration-300 transform hover:scale-105 gap-2"
+              size="lg"
+            >
+              Próximo Passo <ArrowRight className="h-5 w-5" />
+            </Button>
+          </>
+        )}
       </div>
       
       {!allExercisesCompleted && !stepCompleted && (

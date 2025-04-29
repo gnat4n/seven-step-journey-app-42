@@ -8,7 +8,8 @@ import {
   Grid, 
   ShoppingBag,
   Settings,
-  MoreHorizontal
+  MoreHorizontal,
+  User
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -27,7 +28,7 @@ export const MobileNav = () => {
   const location = useLocation();
   const isMobile = useIsMobile();
   
-  if (!isMobile) return null;
+  if (!isMobile || !currentUser) return null;
   
   const navItems = [
     { 
@@ -46,6 +47,15 @@ export const MobileNav = () => {
       icon: Grid 
     }
   ];
+  
+  // Add recipes link if user has reached step 3
+  if (currentUser && currentUser.current_step > 3) {
+    navItems.push({ 
+      path: '/receitas', 
+      label: 'Receitas', 
+      icon: ShoppingBag
+    });
+  }
   
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -80,21 +90,21 @@ export const MobileNav = () => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="sm" className="flex flex-col items-center justify-center p-1 h-auto">
-              <MoreHorizontal size={22} className="text-gray-500 dark:text-gray-400" />
-              <span className="text-xs mt-1 text-gray-500 dark:text-gray-400">Mais</span>
+              <User size={22} className="text-gray-500 dark:text-gray-400" />
+              <span className="text-xs mt-1 text-gray-500 dark:text-gray-400">Perfil</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="dark:bg-brand-700 dark:border-brand-600">
             <DropdownMenuItem asChild>
-              <Link to="/lista-compras" className="flex items-center dark:text-white dark:focus:bg-brand-600">
-                <ShoppingBag className="mr-2 h-4 w-4" />
-                <span>Lista de Compras</span>
+              <Link to="/perfil" className="flex items-center dark:text-white dark:focus:bg-brand-600">
+                <Settings className="mr-2 h-4 w-4" />
+                <span>Meu Perfil</span>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link to="/perfil" className="flex items-center dark:text-white dark:focus:bg-brand-600">
-                <Settings className="mr-2 h-4 w-4" />
-                <span>Perfil</span>
+              <Link to="/lista-compras" className="flex items-center dark:text-white dark:focus:bg-brand-600">
+                <ShoppingBag className="mr-2 h-4 w-4" />
+                <span>Lista de Compras</span>
               </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
