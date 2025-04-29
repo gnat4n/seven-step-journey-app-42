@@ -7,6 +7,7 @@ import { MainNav } from '@/components/MainNav';
 import { JourneyProgress } from '@/components/JourneyProgress';
 import { StepContent } from '@/components/StepContent';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { motion } from 'framer-motion';
 
 const StepPage = () => {
   const { stepId } = useParams<{ stepId: string }>();
@@ -48,45 +49,81 @@ const StepPage = () => {
     }
   };
   
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+  
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1,
+      y: 0,
+      transition: { type: 'spring', stiffness: 100 }
+    }
+  };
+  
   return (
     <AuthGuard>
       <MainNav />
-      <main className="container py-6 animate-fade-in">
-        <div className="flex flex-col items-center space-y-8">
+      <main className="container py-6 dark:bg-brand-800">
+        <motion.div 
+          className="flex flex-col items-center space-y-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {/* Step Progress */}
-          <div className="w-full max-w-3xl transform hover:scale-[1.02] transition-all duration-300">
+          <motion.div 
+            className="w-full max-w-3xl transform hover:scale-[1.02] transition-all duration-300"
+            variants={itemVariants}
+          >
             <JourneyProgress />
-          </div>
+          </motion.div>
           
           {/* Step Title */}
-          <div className="text-center transform hover:scale-[1.02] transition-all duration-300">
-            <h1 className="text-3xl font-serif font-bold bg-gradient-to-r from-brand-600 to-brand-800 bg-clip-text text-transparent mb-2">
+          <motion.div 
+            className="text-center transform hover:scale-[1.02] transition-all duration-300"
+            variants={itemVariants}
+          >
+            <h1 className="text-3xl font-serif font-bold bg-gradient-to-r from-brand-600 to-brand-800 dark:from-brand-300 dark:to-brand-100 bg-clip-text text-transparent mb-2">
               Passo {stepNumber}: {stepData?.title}
             </h1>
-            <p className="text-muted-foreground animate-fade-in">{stepData?.description}</p>
-          </div>
+            <p className="text-muted-foreground dark:text-white/70">{stepData?.description}</p>
+          </motion.div>
           
           {/* Already Completed Alert */}
           {isCompleted && (
-            <Alert className="bg-gradient-to-r from-brand-100 to-brand-50 border-brand-300 max-w-3xl transform hover:scale-[1.02] transition-all duration-300">
-              <AlertTitle className="text-brand-700">Passo já concluído!</AlertTitle>
-              <AlertDescription>
-                Você já completou esse passo, mas pode revisitá-lo a qualquer momento.
-              </AlertDescription>
-            </Alert>
+            <motion.div variants={itemVariants}>
+              <Alert className="bg-gradient-to-r from-brand-100 to-brand-50 dark:from-brand-700/50 dark:to-brand-800/50 border-brand-300 dark:border-brand-600 max-w-3xl transform hover:scale-[1.02] transition-all duration-300">
+                <AlertTitle className="text-brand-700 dark:text-brand-300">Passo já concluído!</AlertTitle>
+                <AlertDescription className="dark:text-white/70">
+                  Você já completou esse passo, mas pode revisitá-lo a qualquer momento.
+                </AlertDescription>
+              </Alert>
+            </motion.div>
           )}
           
           {/* Step Content */}
           {stepData && (
-            <div className="transform hover:shadow-lg transition-all duration-300">
+            <motion.div 
+              className="transform hover:shadow-lg transition-all duration-300 w-full"
+              variants={itemVariants}
+            >
               <StepContent 
                 step={stepData} 
                 onComplete={handleCompleteStep}
                 stepCompleted={isCompleted}
               />
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
       </main>
     </AuthGuard>
   );
