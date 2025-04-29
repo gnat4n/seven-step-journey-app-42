@@ -1,5 +1,5 @@
 
-const CACHE_NAME = '7steps-app-v4';
+const CACHE_NAME = '7steps-app-v3';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -94,7 +94,7 @@ self.addEventListener('push', event => {
     const options = {
       body: data.body,
       icon: '/icons/icon-192x192.png',
-      badge: '/icons/icon-72x72.png',
+      badge: '/icons/badge-72x72.png',
       vibrate: [100, 50, 100],
       data: {
         url: data.url || '/'
@@ -114,19 +114,6 @@ self.addEventListener('notificationclick', event => {
   if (event.notification.data && event.notification.data.url) {
     event.waitUntil(
       clients.openWindow(event.notification.data.url)
-    );
-  }
-});
-
-// Ativar o modo de tela cheia para uma experiência mais nativa
-self.addEventListener('fetch', event => {
-  if (event.request.url.includes('manifest.json')) {
-    event.respondWith(
-      fetch(event.request).then(response => {
-        return response;
-      }).catch(() => {
-        return caches.match(event.request);
-      })
     );
   }
 });
