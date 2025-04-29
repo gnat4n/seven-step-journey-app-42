@@ -7,12 +7,15 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/components/ui/sonner';
+import { usePwaInstall } from '@/hooks/usePwaInstall';
+import { Download } from 'lucide-react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useApp();
   const navigate = useNavigate();
+  const { isInstallable, installApp } = usePwaInstall();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,8 +52,21 @@ const Login = () => {
     }
   };
 
+  // Handle PWA installation
+  const handleInstall = async () => {
+    try {
+      const installed = await installApp();
+      if (installed) {
+        toast.success('Aplicativo instalado com sucesso!');
+      }
+    } catch (error) {
+      console.error('Erro ao instalar o aplicativo:', error);
+      toast.error('Não foi possível instalar o aplicativo. Tente novamente.');
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-brand-100/30 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-brand-100/30 dark:bg-brand-800/50 px-4">
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center mb-6">
           <img 
@@ -58,23 +74,23 @@ const Login = () => {
             alt="7Steps Logo" 
             className="h-16 mb-4"
           />
-          <h1 className="text-2xl font-serif text-brand-700">Bem-vinda ao 7Steps!</h1>
-          <p className="text-muted-foreground text-center mt-2">
+          <h1 className="text-2xl font-serif text-brand-700 dark:text-brand-300">Bem-vinda ao 7Steps!</h1>
+          <p className="text-muted-foreground text-center mt-2 dark:text-gray-300">
             O método que bloqueia a fome em 7 passos
           </p>
         </div>
 
-        <Card className="border-brand-200 shadow-md">
+        <Card className="border-brand-200 shadow-md dark:border-brand-700 dark:bg-brand-800/70">
           <CardHeader className="space-y-1">
-            <CardTitle className="text-xl text-center">Entrar</CardTitle>
-            <CardDescription className="text-center">
+            <CardTitle className="text-xl text-center dark:text-white">Entrar</CardTitle>
+            <CardDescription className="text-center dark:text-gray-300">
               Entre com seu e-mail para acessar sua conta
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">E-mail</Label>
+                <Label htmlFor="email" className="dark:text-gray-200">E-mail</Label>
                 <Input
                   id="email"
                   type="email"
@@ -82,12 +98,13 @@ const Login = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={isLoading}
+                  className="dark:bg-brand-700/50 dark:border-brand-600 dark:text-white dark:placeholder-gray-400"
                   required
                 />
               </div>
               <Button 
                 type="submit" 
-                className="w-full bg-brand-500 hover:bg-brand-600"
+                className="w-full bg-brand-500 hover:bg-brand-600 dark:bg-brand-500 dark:hover:bg-brand-600 dark:text-white"
                 disabled={isLoading}
               >
                 {isLoading ? 'Entrando...' : 'Entrar'}
@@ -95,20 +112,27 @@ const Login = () => {
             </form>
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
-            <div className="text-sm text-center w-full text-muted-foreground">
-              <span>Ainda não tem uma conta? </span>
-              <Link to="#" className="text-brand-600 hover:underline">
-                Clique aqui
-              </Link>
-            </div>
-            <Button 
-              variant="outline"
-              className="w-full border-brand-200 hover:bg-brand-50"
-              onClick={handleDemoLogin}
-              disabled={isLoading}
-            >
-              Acessar versão demo
-            </Button>
+            {isInstallable && (
+              <Button 
+                variant="outline"
+                className="w-full border-brand-200 hover:bg-brand-50 dark:border-brand-600 dark:text-white dark:hover:bg-brand-700 dark:hover:text-white flex items-center justify-center gap-2"
+                onClick={handleInstall}
+                disabled={isLoading}
+              >
+                <Download size={18} />
+                Instalar o App
+              </Button>
+            )}
+            {!isInstallable && (
+              <Button 
+                variant="outline"
+                className="w-full border-brand-200 hover:bg-brand-50 dark:border-brand-600 dark:text-white dark:hover:bg-brand-700 dark:hover:text-white"
+                onClick={handleDemoLogin}
+                disabled={isLoading}
+              >
+                Acessar versão demo
+              </Button>
+            )}
           </CardFooter>
         </Card>
       </div>

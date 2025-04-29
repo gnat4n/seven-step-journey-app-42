@@ -1,8 +1,9 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle, XCircle, MoveVertical } from 'lucide-react';
+import { useTheme } from '@/context/ThemeContext';
 
 type DraggableItem = {
   id: string;
@@ -39,6 +40,19 @@ export const DragDropExercise: React.FC<DragDropExerciseProps> = ({
   const [dragSource, setDragSource] = useState<string | null>(null);
   const [isChecking, setIsChecking] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [touchStartY, setTouchStartY] = useState(0);
+  const { theme } = useTheme();
+  
+  // Handle window resize for responsiveness
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   const handleDragStart = (item: DraggableItem, source: string) => {
     setDraggedItem(item);
@@ -51,7 +65,38 @@ export const DragDropExercise: React.FC<DragDropExerciseProps> = ({
   
   const handleDrop = (e: React.DragEvent, targetZoneId: string) => {
     e.preventDefault();
+    moveItemToZone(targetZoneId);
+  };
+  
+  // Mobile touch handlers
+  const handleTouchStart = (item: DraggableItem, source: string, e: React.TouchEvent) => {
+    setDraggedItem(item);
+    setDragSource(source);
+    setTouchStartY(e.touches[0].clientY);
     
+    // Add visual feedback for touch
+    if (e.currentTarget) {
+      e.currentTarget.classList.add('opacity-50', 'scale-105');
+    }
+  };
+  
+  const handleTouchEnd = (e: React.TouchEvent, targetZoneId?: string) => {
+    e.preventDefault();
+    
+    // Remove visual feedback
+    if (e.currentTarget) {
+      e.currentTarget.classList.remove('opacity-50', 'scale-105');
+    }
+    
+    if (targetZoneId && draggedItem) {
+      moveItemToZone(targetZoneId);
+    }
+    
+    setDraggedItem(null);
+    setDragSource(null);
+  };
+  
+  const moveItemToZone = (targetZoneId: string) => {
     if (!draggedItem) return;
     
     // If item comes from available items
@@ -92,9 +137,6 @@ export const DragDropExercise: React.FC<DragDropExerciseProps> = ({
           : zone
       ));
     }
-    
-    setDraggedItem(null);
-    setDragSource(null);
   };
   
   const handleReturnToDeck = (item: DraggableItem, zoneId: string) => {
@@ -136,23 +178,44 @@ export const DragDropExercise: React.FC<DragDropExerciseProps> = ({
   return (
     <div className="space-y-6 animate-fade-in">
       <Card className="border-brand-200 dark:border-brand-700 bg-white dark:bg-brand-800/60">
-        <CardContent className="p-6">
+        <CardContent className="p-4 sm:p-6">
           <div className="mb-4">
             <h3 className="text-lg font-medium mb-2 dark:text-white">{title}</h3>
             <p className="text-muted-foreground dark:text-white/70">{description}</p>
           </div>
           
-          <div className="mt-6 space-y-6">
+          <div className="mt-4 sm:mt-6 space-y-4 sm:space-y-6">
             {/* Available Items */}
-            <div className="border border-dashed border-gray-300 dark:border-brand-600 p-4 rounded-lg">
+            <div 
+              className="border border-dashed border-gray-300 dark:border-brand-600 p-3 sm:p-4 rounded-lg"
+              onDragOver={handleDragOver}
+              onDrop={(e) => {
+                e.preventDefault();
+                if (draggedItem && dragSource && dragSource !== 'available') {
+                  // Remove from source zone
+                  const updatedZones = dropZones.map(zone => 
+                    zone.id === dragSource
+                      ? { ...zone, items: zone.items.filter(item => item.id !== draggedItem.id) }
+                      : zone
+                  );
+                  setDropZones(updatedZones);
+                  
+                  // Add back to available items
+                  setAvailableItems([...availableItems, draggedItem]);
+                  setDraggedItem(null);
+                  setDragSource(null);
+                }
+              }}
+            >
               <h4 className="text-sm font-medium mb-3 text-muted-foreground dark:text-white/70">Itens Disponíveis</h4>
-              <div className="flex flex-wrap gap-2 min-h-[50px]">
+              <div className="flex flex-wrap gap-2 min-h-[60px]">
                 {availableItems.map((item) => (
                   <div
                     key={item.id}
                     draggable
                     onDragStart={() => handleDragStart(item, 'available')}
-                    className="px-3 py-2 bg-brand-50 dark:bg-brand-700 text-brand-800 dark:text-white rounded-md border border-brand-200 dark:border-brand-600 cursor-grab flex items-center gap-2"
+                    onTouchStart={(e) => handleTouchStart(item, 'available', e)}
+                    className="px-3 py-2 bg-brand-50 dark:bg-brand-700 text-brand-800 dark:text-white rounded-md border border-brand-200 dark:border-brand-600 cursor-grab flex items-center gap-2 active:scale-105 transition-transform touch-manipulation"
                   >
                     <MoveVertical className="h-4 w-4 text-brand-500 dark:text-brand-300" />
                     <span>{item.content}</span>
@@ -167,13 +230,14 @@ export const DragDropExercise: React.FC<DragDropExerciseProps> = ({
             </div>
             
             {/* Drop Zones */}
-            <div className="grid gap-6">
+            <div className="grid gap-4 sm:gap-6">
               {dropZones.map((zone) => (
                 <div
                   key={zone.id}
                   onDragOver={handleDragOver}
                   onDrop={(e) => handleDrop(e, zone.id)}
-                  className="border border-dashed border-gray-300 dark:border-brand-600 p-4 rounded-lg"
+                  onTouchEnd={(e) => handleTouchEnd(e, zone.id)}
+                  className="border border-dashed border-gray-300 dark:border-brand-600 p-3 sm:p-4 rounded-lg"
                 >
                   <h4 className="text-sm font-medium mb-2 flex justify-between dark:text-white">
                     <span>{zone.label}</span>
@@ -190,13 +254,14 @@ export const DragDropExercise: React.FC<DragDropExerciseProps> = ({
                         key={item.id}
                         draggable
                         onDragStart={() => handleDragStart(item, zone.id)}
-                        className="px-3 py-2 bg-brand-100 dark:bg-brand-600 text-brand-800 dark:text-white rounded-md border border-brand-200 dark:border-brand-500 cursor-grab flex items-center gap-2 group relative"
+                        onTouchStart={(e) => handleTouchStart(item, zone.id, e)}
+                        className="px-3 py-2 bg-brand-100 dark:bg-brand-600 text-brand-800 dark:text-white rounded-md border border-brand-200 dark:border-brand-500 cursor-grab flex items-center gap-2 group relative active:scale-105 transition-transform touch-manipulation"
                       >
                         <MoveVertical className="h-4 w-4 text-brand-500 dark:text-brand-300" />
                         <span>{item.content}</span>
                         <button
                           onClick={() => handleReturnToDeck(item, zone.id)}
-                          className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-100 text-red-500 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                          className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-100 text-red-500 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity dark:bg-red-900 dark:text-red-300 sm:opacity-100"
                         >
                           <XCircle className="h-4 w-4" />
                         </button>
