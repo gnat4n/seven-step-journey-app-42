@@ -10,7 +10,6 @@ import { toast } from '@/components/ui/sonner';
 
 const Login = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useApp();
   const navigate = useNavigate();
@@ -18,19 +17,19 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!email || !password) {
-      toast.error('Por favor, preencha todos os campos.');
+    if (!email) {
+      toast.error('Por favor, preencha o campo de e-mail.');
       return;
     }
     
     setIsLoading(true);
     
     try {
-      await login(email, password);
+      await login(email);
       navigate('/');
     } catch (error) {
       console.error(error);
-      toast.error('Erro ao fazer login. Verifique suas credenciais.');
+      toast.error('Erro ao fazer login. Verifique seu e-mail.');
     } finally {
       setIsLoading(false);
     }
@@ -40,7 +39,7 @@ const Login = () => {
   const handleDemoLogin = async () => {
     setIsLoading(true);
     try {
-      await login('demo@7steps.com', 'demo123');
+      await login('demo@7steps.com');
       navigate('/');
     } catch (error) {
       console.error(error);
@@ -69,7 +68,7 @@ const Login = () => {
           <CardHeader className="space-y-1">
             <CardTitle className="text-xl text-center">Entrar</CardTitle>
             <CardDescription className="text-center">
-              Entre com seu e-mail e senha para acessar sua conta
+              Entre com seu e-mail para acessar sua conta
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -82,18 +81,6 @@ const Login = () => {
                   placeholder="seu@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  disabled={isLoading}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">Senha</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
                   required
                 />

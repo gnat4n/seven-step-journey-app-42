@@ -206,7 +206,7 @@ const initialState: AppState = {
 
 const AppContext = createContext<{
   state: AppState;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string) => Promise<void>;
   logout: () => void;
   addXP: (amount: number) => void;
   completeStep: (stepId: number) => Promise<void>;
@@ -371,22 +371,38 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   }, [state.currentUser]);
   
-  const login = async (email: string, password: string) => {
+  const login = async (email: string) => {
     dispatch({ type: 'SET_LOADING', payload: true });
     
     try {
-      // In a real app, this would be an API call
-      // For demo purposes, we'll use mock data
+      // Em um app real, isso seria uma chamada de API
+      // Para fins de demonstração, usaremos dados fictícios
       
-      // Simple validation
-      if (email === 'demo@7steps.com' && password === 'demo123') {
-        dispatch({ type: 'SET_USER', payload: demoData.user });
+      // Validação simples - aceita qualquer email
+      if (email) {
+        // Para o e-mail de demonstração, usamos os dados de demo
+        if (email === 'demo@7steps.com') {
+          dispatch({ type: 'SET_USER', payload: demoData.user });
+        } else {
+          // Para outros e-mails, criamos um usuário temporário
+          const tempUser: User = {
+            id: `user-${Date.now()}`,
+            email: email,
+            xp_total: 0,
+            current_step: 1,
+            avatar_status: 1,
+            is_admin: false,
+            created_at: new Date().toISOString()
+          };
+          dispatch({ type: 'SET_USER', payload: tempUser });
+        }
+        
         dispatch({ type: 'SET_LOADING', payload: false });
         toast.success('Login realizado com sucesso!');
         return;
       }
       
-      throw new Error('Credenciais inválidas');
+      throw new Error('E-mail inválido');
     } catch (error) {
       dispatch({ type: 'SET_LOADING', payload: false });
       console.error('Login error:', error);
