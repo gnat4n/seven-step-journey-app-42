@@ -5,6 +5,7 @@
   "description": "Método que bloqueia a fome em 7 passos - Transforme sua relação com a comida",
   "start_url": "/",
   "display": "standalone",
+  "display_override": ["fullscreen", "minimal-ui"],
   "orientation": "portrait",
   "background_color": "#f3e8ff",
   "theme_color": "#9b87f5",
@@ -102,5 +103,8 @@
   "lang": "pt-BR",
   "prefer_related_applications": false,
   "capture_links": "existing-client-navigate",
-  "scope": "/"
+  "scope": "/",
+  "launch_handler": {
+    "client_mode": ["focus-existing", "auto"]
+  }
 }

@@ -4,11 +4,11 @@ import { JourneyStep } from '@/types';
 export const mockSteps: JourneyStep[] = [
   {
     id: 1,
-    title: "Consciência",
-    description: "Desenvolva consciência sobre seus hábitos alimentares",
+    title: "Desintoxicação Mental",
+    description: "Quebrando o ciclo mental da fome emocional",
     xp_reward: 50,
     content: `
-      <h2>Consciência: O Primeiro Passo</h2>
+      <h2>Desintoxicação Mental: Quebrando o Ciclo</h2>
       <p>Grande parte da nossa fome não tem nada a ver com necessidades nutricionais, mas sim com gatilhos emocionais. Antes de falarmos de alimentos e nutrientes, precisamos "limpar" nossa mente.</p>
       
       <h3>Identificando seus Gatilhos</h3>
@@ -73,14 +73,14 @@ export const mockSteps: JourneyStep[] = [
   },
   {
     id: 2,
-    title: "Nutrição",
-    description: "Aprenda sobre nutrientes que promovem saciedade",
+    title: "O Poder da Inulina",
+    description: "O segredo natural para prolongar a saciedade",
     xp_reward: 50,
     content: `
-      <h2>Nutrição: O Poder dos Alimentos Certos</h2>
-      <p>Agora que começamos a trabalhar sua mente, vamos falar sobre os nutrientes que podem ajudar a controlar naturalmente sua fome.</p>
+      <h2>O Poder da Inulina: O Segredo Natural para Prolongar a Saciedade</h2>
+      <p>Agora que começamos a trabalhar sua mente, vamos falar sobre algo que vai revolucionar sua fisiologia: a inulina.</p>
       
-      <h3>O Poder da Inulina</h3>
+      <h3>O que é Inulina?</h3>
       <p>A inulina é uma fibra solúvel natural encontrada em diversos vegetais. Mas não é uma fibra qualquer - ela é considerada um prebiótico funcional com superpoderes contra a fome.</p>
       <p>Diferente de outras fibras, a inulina tem uma capacidade extraordinária: quando entra em contato com água no seu estômago, forma um gel que aumenta de volume, criando uma sensação de saciedade que dura horas!</p>
       
@@ -136,311 +136,301 @@ export const mockSteps: JourneyStep[] = [
   },
   {
     id: 3,
-    title: "Mindful Eating",
-    description: "Pratique a alimentação consciente",
+    title: "O Segredo da Espirulina",
+    description: "O superalimento que desliga o botão da fome",
     xp_reward: 50,
     content: `
-      <h2>Mindful Eating: Comer com Atenção Plena</h2>
-      <p>Você já parou para perceber quantas vezes comemos no "piloto automático"? Mindful eating, ou alimentação consciente, é uma prática que nos traz de volta ao momento presente durante as refeições.</p>
+      <h2>O Segredo da Espirulina: O Superalimento que Desliga o Botão da Fome</h2>
+      <p>Enquanto a inulina trabalha fisicamente no seu estômago, precisamos de algo que atue diretamente nos hormônios da fome. É aí que entra a espirulina - um dos superalimentos mais poderosos do planeta.</p>
       
-      <h3>O Que é Mindful Eating?</h3>
-      <p>Mindful eating significa trazer consciência plena para o ato de comer. Isso envolve:</p>
+      <h3>O que é Espirulina?</h3>
+      <p>A espirulina é uma microalga azul-esverdeada cultivada em água doce. Não se assuste com o nome "alga" - ela é consumida há séculos por diversas culturas e hoje é reconhecida mundialmente como um dos alimentos mais nutritivos que existem.</p>
+      <p>Para ter ideia, a espirulina contém:</p>
       <ul>
-        <li>Prestar total atenção à experiência de comer, momento a momento</li>
-        <li>Observar cores, texturas, sabores, aromas dos alimentos</li>
-        <li>Notar sensações físicas enquanto come: mastigação, deglutição</li>
-        <li>Perceber sinais de fome e saciedade do corpo</li>
-        <li>Identificar respostas emocionais aos alimentos</li>
+        <li>Até 70% de proteína completa (mais que qualquer alimento vegetal)</li>
+        <li>Todos os aminoácidos essenciais</li>
+        <li>Vitaminas do complexo B, vitamina E, e betacaroteno</li>
+        <li>Minerais como ferro, magnésio e potássio</li>
+        <li>Poderosos antioxidantes, incluindo ficocianina</li>
       </ul>
       
-      <h3>Benefícios do Mindful Eating</h3>
-      <p>Estudos científicos mostram que a prática regular de mindful eating pode:</p>
+      <h3>Como a Espirulina Controla sua Fome</h3>
+      <p>A espirulina trabalha de várias formas para reduzir sua fome:</p>
       <ol>
-        <li>Reduzir episódios de compulsão alimentar</li>
-        <li>Melhorar a digestão</li>
-        <li>Aumentar o prazer ao comer</li>
-        <li>Ajudar a reconhecer a real saciedade</li>
-        <li>Diminuir a alimentação emocional</li>
+        <li>Estimula a produção de hormônios de saciedade (como leptina)</li>
+        <li>Fornece proteína de alta qualidade que mantém você satisfeita por mais tempo</li>
+        <li>Estabiliza os níveis de açúcar no sangue, prevenindo aquela queda que causa fome repentina</li>
+        <li>Aumenta sua energia sem estimulantes, reduzindo a busca por "combustíveis rápidos" como açúcar</li>
+        <li>Contém ácido γ-linolênico, que auxilia no metabolismo de gorduras</li>
       </ol>
       
-      <h3>Exercício: A Refeição de 20 Minutos</h3>
-      <p>Reserve pelo menos 20 minutos para uma refeição. Desligue todas as distrações (TV, celular, computador). Concentre-se totalmente na experiência de comer:</p>
-      <ul>
-        <li>Observe o alimento antes de começar: cores, aromas, apresentação</li>
-        <li>Sinta gratidão pelo alimento e todos envolvidos em trazê-lo até você</li>
-        <li>Mastigue cada garfada pelo menos 20 vezes</li>
-        <li>Pouse os talheres entre as garfadas</li>
-        <li>Perceba os sabores mudando enquanto mastiga</li>
-      </ul>
-      
-      <p>Complete os exercícios abaixo para desenvolver sua prática de Mindful Eating!</p>
+      <p>Complete os exercícios abaixo para aproveitar os benefícios da espirulina!</p>
     `,
     exercises: [
       {
         id: 301,
-        title: "Exercício da Uva Passa",
-        description: "Prática clássica de mindfulness com alimentos",
+        title: "Escolhendo a Espirulina",
+        description: "Aprenda a selecionar um produto de qualidade",
         type: "challenge",
         xp_reward: 15,
-        content: "Coma uma única uva passa (ou outro pequeno alimento) com total atenção, durante 5 minutos, observando todos os aspectos sensoriais da experiência."
+        content: "Pesquise sobre marcas de espirulina, verificando certificações e avaliando suas opções entre pó, comprimidos ou cápsulas."
       },
       {
         id: 302,
-        title: "Refeição Sem Distrações",
-        description: "Faça uma refeição com atenção plena",
+        title: "Experimento de 3 Dias",
+        description: "Observe os efeitos na sua fome",
         type: "diary",
         xp_reward: 20,
-        content: "Faça pelo menos uma refeição por dia sem nenhuma distração (TV, celular, computador, leitura) por 3 dias. Registre suas observações."
+        content: "Consuma 1g de espirulina diariamente por 3 dias consecutivos, 30 minutos antes das refeições. Anote como se sentiu em relação à fome e energia."
       },
       {
         id: 303,
-        title: "Escala de Fome",
-        description: "Aprenda a identificar seus níveis de fome",
+        title: "Receita com Espirulina",
+        description: "Incorpore a espirulina na sua alimentação",
         type: "form",
         xp_reward: 15,
-        content: "Antes de cada refeição principal, avalie sua fome em uma escala de 1 a 10. Coma até chegar ao nível 7 (confortavelmente satisfeita, não cheia). Registre sua experiência."
+        content: "Crie uma receita simples usando espirulina (smoothie, iogurte, etc) e descreva como ficou o sabor, textura e sua experiência."
       }
     ]
   },
   {
     id: 4,
-    title: "Hidratação",
-    description: "Entenda o papel da água no controle da fome",
+    title: "Combinações Poderosas",
+    description: "Refeições que mantêm a fome longe por horas",
     xp_reward: 50,
     content: `
-      <h2>Hidratação: O Segredo Esquecido</h2>
-      <p>Muitas vezes confundimos sede com fome. A hidratação adequada é um componente crítico para controlar a fome e manter um metabolismo saudável.</p>
+      <h2>Combinações Poderosas: Refeições que Mantêm a Fome Longe por Horas</h2>
+      <p>Agora que você conhece os dois superpoderes contra a fome - inulina e espirulina - vamos aprender a combiná-los com outros alimentos para criar refeições que mantenham a fome longe por horas.</p>
       
-      <h3>Água e Controle da Fome</h3>
-      <p>A água desempenha vários papéis fundamentais no controle da fome:</p>
+      <h3>O Princípio do Prato Equilibrado</h3>
+      <p>O segredo para uma saciedade duradoura está na combinação certa de:</p>
       <ul>
-        <li>Ocupa espaço no estômago, criando sensação de saciedade</li>
-        <li>Ajuda a metabolizar gordura (lipólise)</li>
-        <li>Facilita a eliminação de toxinas</li>
-        <li>Melhora a função cognitiva, ajudando em escolhas alimentares conscientes</li>
-        <li>Previne desidratação, que frequentemente é confundida com fome</li>
+        <li><strong>Proteínas:</strong> São o nutriente mais saciante e mantêm a fome longe por mais tempo</li>
+        <li><strong>Fibras:</strong> Ocupam espaço no estômago e retardam a digestão</li>
+        <li><strong>Gorduras saudáveis:</strong> Desaceleram a digestão e enviam sinais de saciedade ao cérebro</li>
+        <li><strong>Água:</strong> Muitas vezes confundimos sede com fome</li>
+      </ul>
+      <p>A proporção ideal para máxima saciedade é:</p>
+      <ul>
+        <li>1/2 do prato: vegetais ricos em fibras</li>
+        <li>1/4 do prato: proteínas de qualidade</li>
+        <li>1/4 do prato: carboidratos complexos ricos em fibras</li>
+        <li>1 colher de sobremesa de gorduras saudáveis</li>
       </ul>
       
-      <h3>O Teste da Sede</h3>
-      <p>Quando sentir fome fora de hora, faça o teste da sede:</p>
-      <ol>
-        <li>Beba um copo de água (250ml)</li>
-        <li>Aguarde 15 minutos</li>
-        <li>Reavalie se ainda sente fome</li>
-      </ol>
-      <p>Em muitos casos, a sensação de fome desaparece porque o que seu corpo realmente precisava era hidratação.</p>
-      
-      <h3>Estratégias para Hidratar-se Melhor</h3>
+      <h3>Cafés da Manhã que Bloqueiam a Fome</h3>
+      <p>Aqui estão algumas ideias de cafés da manhã que podem manter a fome longe por horas:</p>
       <ul>
-        <li>Comece o dia com um copo de água morna com limão</li>
-        <li>Tenha sempre uma garrafa de água reutilizável com você</li>
-        <li>Configure lembretes no celular para beber água</li>
-        <li>Beba um copo de água 30 minutos antes de cada refeição</li>
-        <li>Adicione frutas, pepino ou ervas à água para dar sabor natural</li>
+        <li><strong>Super Bowl de Aveia:</strong> Aveia + inulina + chia + iogurte natural + banana + canela</li>
+        <li><strong>Omelete Nutritiva:</strong> Ovos + folhas verdes refogadas com alho + tomate + espirulina</li>
+        <li><strong>Smoothie Bloqueador:</strong> Banana verde + pasta de amendoim + espirulina + leite vegetal</li>
       </ul>
       
-      <p>Complete os exercícios abaixo para melhorar sua hidratação!</p>
+      <p>Complete os exercícios abaixo para dominar as combinações que bloqueiam a fome!</p>
     `,
     exercises: [
       {
         id: 401,
-        title: "Diário de Hidratação",
-        description: "Monitore sua ingestão de água diariamente",
-        type: "diary",
+        title: "Monte seu Prato Equilibrado",
+        description: "Aplique o princípio do prato equilibrado",
+        type: "dragdrop",
         xp_reward: 15,
-        content: "Por 3 dias, registre toda água/líquidos que consumir. Meta: 30ml por kg de peso corporal diariamente."
+        content: "Organize os alimentos nas proporções corretas para criar um prato equilibrado que promova máxima saciedade."
       },
       {
         id: 402,
-        title: "Teste da Sede",
-        description: "Diferencie sede de fome",
+        title: "Café da Manhã Bloqueador",
+        description: "Prepare um café da manhã que bloqueia a fome",
         type: "challenge",
         xp_reward: 20,
-        content: "Quando sentir fome entre refeições, beba um copo de água e espere 15 minutos. Anote se a sensação de fome persistiu ou não."
+        content: "Prepare um dos cafés da manhã sugeridos ou crie sua própria versão, incluindo inulina e/ou espirulina. Observe por quanto tempo você se sente satisfeita."
       },
       {
         id: 403,
-        title: "Águas Aromatizadas",
-        description: "Crie suas próprias águas saborosas",
-        type: "challenge",
+        title: "Plano de Refeições de 1 Dia",
+        description: "Crie um dia de refeições bloqueadoras",
+        type: "form",
         xp_reward: 15,
-        content: "Prepare 3 diferentes combinações de águas aromatizadas naturalmente (com frutas, ervas, especiarias) para tornar a hidratação mais prazerosa."
+        content: "Planeje um dia inteiro de alimentação (café da manhã, almoço, jantar e lanches) incorporando os princípios de combinações poderosas."
       }
     ]
   },
   {
     id: 5,
-    title: "Gestão do Estresse",
-    description: "Técnicas para reduzir o estresse e a fome emocional",
+    title: "Rotina Realista",
+    description: "Como implementar o método na sua vida corrida",
     xp_reward: 50,
     content: `
-      <h2>Gestão do Estresse: Quebrando o Ciclo Estresse-Fome</h2>
-      <p>O estresse crônico é um dos maiores inimigos do controle da fome. Quando estamos estressados, o corpo libera cortisol, hormônio que aumenta o apetite, especialmente por alimentos calóricos.</p>
+      <h2>Rotina Realista: Como Implementar o Método na Sua Vida Corrida</h2>
+      <p>Ter as informações certas é apenas o primeiro passo. O verdadeiro desafio é encaixar essas mudanças na sua rotina agitada de mulher que trabalha fora e/ou cuida dos filhos. Vamos tornar isso possível!</p>
       
-      <h3>A Conexão Fisiológica Entre Estresse e Fome</h3>
-      <p>Entender como o estresse afeta seu comportamento alimentar é fundamental:</p>
-      <ul>
-        <li>Cortisol elevado aumenta o desejo por alimentos ricos em açúcar e gordura</li>
-        <li>Estresse crônico pode causar resistência à leptina (hormônio da saciedade)</li>
-        <li>Ansiedade frequentemente leva a "comer sem pensar"</li>
-        <li>Privação de sono (comum em períodos estressantes) aumenta a grelina (hormônio da fome)</li>
-        <li>O ciclo vicioso: estresse → comer → culpa → mais estresse → mais comer</li>
-      </ul>
-      
-      <h3>Técnicas de Respiração para Momentos Críticos</h3>
-      <p>Quando sentir o estresse aumentando e a vontade de comer surgindo:</p>
+      <h3>Planejamento Semanal Express</h3>
+      <p>Regra de ouro: Dedique 1 hora por semana para planejar, economize 5 horas durante a semana.</p>
+      <p>Passos simples:</p>
       <ol>
-        <li><strong>Respiração 4-7-8:</strong> Inspire pelo nariz (4s), segure o ar (7s), expire pela boca (8s)</li>
-        <li><strong>Respiração Quadrada:</strong> Inspire (4s), segure (4s), expire (4s), segure (4s)</li>
-        <li><strong>3 Respirações Profundas:</strong> Simples, mas eficaz. Concentre-se apenas na sua respiração</li>
+        <li>Escolha o dia: Domingo à noite ou sábado pela manhã geralmente funcionam melhor</li>
+        <li>Faça uma lista de compras baseada nas receitas que escolheu para a semana</li>
+        <li>Prepare alguns itens básicos:
+          <ul>
+            <li>Cozinhe 2-3 proteínas diferentes (frango, ovo cozido, lentilhas)</li>
+            <li>Prepare 1 grão/carboidrato (arroz integral, quinoa)</li>
+            <li>Lave e corte vegetais para a semana</li>
+            <li>Prepare porções de inulina e espirulina para facilitar o uso diário</li>
+          </ul>
+        </li>
+        <li>Monte sua caixa de emergência:
+          <ul>
+            <li>Cápsulas de espirulina</li>
+            <li>Barras de proteína sem açúcar</li>
+            <li>Castanhas porcionadas</li>
+            <li>Sachês de inulina para levar na bolsa</li>
+          </ul>
+        </li>
       </ol>
       
-      <h3>Práticas Diárias Anti-Estresse</h3>
+      <h3>Preparação para Dias Caóticos</h3>
+      <p>Sabemos que nem todos os dias correm como planejado. Para dias extremamente corridos, tenha estas estratégias:</p>
       <ul>
-        <li>Meditação: 5-10 minutos diários já trazem benefícios significativos</li>
-        <li>Caminhadas na natureza: reduzem cortisol e clareiam a mente</li>
-        <li>Banhos de imersão com sais de Epsom: relaxam o sistema nervoso</li>
-        <li>Escrita expressiva: coloque suas preocupações no papel para processá-las</li>
-        <li>Limite o tempo em redes sociais e notícias: fontes frequentes de estresse</li>
+        <li><strong>Café da manhã de 2 minutos:</strong> Smoothie no liquidificador (banana + espirulina + inulina + leite vegetal)</li>
+        <li><strong>Almoço de emergência:</strong> Potinho com atum + grão-de-bico + folhas + azeite + 1 cápsula de espirulina</li>
+        <li><strong>Jantar expresso:</strong> Omelete (3 minutos para preparar) ou sopa instantânea caseira (prepare e congele em porções)</li>
       </ul>
       
-      <p>Complete os exercícios abaixo para melhorar sua gestão de estresse!</p>
+      <p>Complete os exercícios abaixo para criar sua rotina realista!</p>
     `,
     exercises: [
       {
         id: 501,
-        title: "Diário de Estresse e Alimentação",
-        description: "Identifique padrões entre estresse e comportamento alimentar",
-        type: "diary",
+        title: "Planejamento Semanal Express",
+        description: "Crie seu primeiro plano semanal",
+        type: "form",
         xp_reward: 15,
-        content: "Por 3 dias, registre seu nível de estresse (1-10) e se esse estresse influenciou suas escolhas alimentares. Identifique padrões."
+        content: "Dedique 30 minutos para planejar suas refeições da próxima semana, incluindo uma lista de compras e preparações antecipadas."
       },
       {
         id: 502,
-        title: "Meditação da Ancoragem",
-        description: "Aprenda uma técnica rápida para acalmar-se",
+        title: "Monte sua Caixa de Emergência",
+        description: "Prepare-se para momentos desafiadores",
         type: "challenge",
         xp_reward: 20,
-        content: "Pratique a meditação da ancoragem: sente-se confortavelmente, feche os olhos, foque na sensação da respiração nas narinas por 5 minutos."
+        content: "Monte uma caixa/kit de emergência com opções para momentos de fome fora de hora ou dias muito corridos."
       },
       {
         id: 503,
-        title: "Rotina Anti-Estresse",
-        description: "Crie seu próprio protocolo para momentos estressantes",
+        title: "Estratégias para Eventos Sociais",
+        description: "Planeje como manter o controle em situações sociais",
         type: "form",
         xp_reward: 15,
-        content: "Desenvolva uma rotina pessoal de 5-10 minutos para momentos de alto estresse, incluindo respiração, movimento e atenção plena."
+        content: "Descreva suas estratégias para 3 tipos de eventos sociais (jantar fora, festa de aniversário, happy hour com colegas)."
       }
     ]
   },
   {
     id: 6,
-    title: "Movimento",
-    description: "Atividade física para regular o apetite",
+    title: "Reprogramação Emocional",
+    description: "Libertando-se do ciclo fome-emoção",
     xp_reward: 50,
     content: `
-      <h2>Movimento: O Regulador Natural do Apetite</h2>
-      <p>O exercício físico adequado não apenas queima calorias, mas também regula hormônios relacionados à fome, melhora a sensibilidade à insulina e reduz o estresse.</p>
+      <h2>Reprogramação Emocional: Libertando-se do Ciclo Fome-Emoção</h2>
+      <p>Agora que você já tem ferramentas práticas para controlar sua fome física, vamos trabalhar no aspecto mais desafiador: a fome emocional.</p>
       
-      <h3>Como o Movimento Regula a Fome</h3>
-      <p>O movimento físico apropriado tem efeitos poderosos na regulação do apetite:</p>
+      <h3>Diferenciando Fome Física de Emocional</h3>
+      <p>Seu corpo comunica fome física de forma muito diferente da fome emocional. Aprender a identificar cada uma é o primeiro passo para a libertação:</p>
+      <p><strong>Fome Física:</strong></p>
       <ul>
-        <li>Reduz temporariamente a grelina (hormônio da fome)</li>
-        <li>Aumenta peptídeos de saciedade após exercícios moderados</li>
-        <li>Melhora a sensibilidade à insulina, estabilizando os níveis de açúcar no sangue</li>
-        <li>Diminui o cortisol quando praticado na intensidade adequada</li>
-        <li>Aumenta a sensibilidade aos sinais naturais de fome e saciedade do corpo</li>
+        <li>Surge gradualmente</li>
+        <li>Pode esperar</li>
+        <li>Satisfeita com qualquer alimento</li>
+        <li>Para quando você está cheia</li>
+        <li>Não causa culpa</li>
+      </ul>
+      <p><strong>Fome Emocional:</strong></p>
+      <ul>
+        <li>Surge repentinamente</li>
+        <li>Parece urgente</li>
+        <li>Deseja alimentos específicos (geralmente doces/gordurosos)</li>
+        <li>Continua mesmo após estar cheia</li>
+        <li>Frequentemente causa culpa</li>
       </ul>
       
-      <h3>Encontre Seu Movimento Ideal</h3>
-      <p>Nem todo movimento tem o mesmo efeito na fome. Encontre o que funciona melhor para você:</p>
+      <h3>Técnicas de Respiração para Momentos de Ansiedade</h3>
+      <p>Quando a vontade de comer por ansiedade bater forte, experimente estas técnicas:</p>
+      <p><strong>Respiração 4-7-8:</strong></p>
       <ol>
-        <li><strong>Para reduzir o apetite:</strong> Exercícios moderados como caminhada rápida, natação leve, yoga</li>
-        <li><strong>Para gestão de estresse:</strong> Yoga, tai chi, pilates, alongamentos profundos</li>
-        <li><strong>Para melhorar sensibilidade à insulina:</strong> Combinação de exercícios aeróbicos e de força</li>
+        <li>Inspire pelo nariz contando até 4</li>
+        <li>Segure o ar contando até 7</li>
+        <li>Expire pela boca contando até 8</li>
+        <li>Repita 3 vezes</li>
       </ol>
-      <p>Atenção: Exercícios muito intensos podem aumentar a fome em algumas pessoas. Observe como seu corpo responde.</p>
       
-      <h3>Movimento no Dia a Dia</h3>
-      <p>Não é preciso academia para aproveitar os benefícios do movimento:</p>
-      <ul>
-        <li>Caminhadas curtas após as refeições (apenas 10 minutos já ajudam na digestão)</li>
-        <li>Pausas a cada hora para esticar-se por 2 minutos</li>
-        <li>Subir escadas em vez de usar o elevador</li>
-        <li>Dançar enquanto faz tarefas domésticas</li>
-        <li>"Reuniões caminhadas" em vez de sentadas</li>
-      </ul>
-      
-      <p>Complete os exercícios abaixo para incorporar movimento regulador à sua rotina!</p>
+      <p>Complete os exercícios abaixo para transformar sua relação emocional com a comida!</p>
     `,
     exercises: [
       {
         id: 601,
-        title: "Caminhada Digestiva",
-        description: "Use caminhadas curtas para melhorar a digestão",
-        type: "challenge",
+        title: "Diário de Fome Física vs. Emocional",
+        description: "Aprenda a identificar os diferentes tipos de fome",
+        type: "diary",
         xp_reward: 15,
-        content: "Por 3 dias, faça uma caminhada leve de 10 minutos após o almoço ou jantar. Observe como se sente em relação à digestão e saciedade."
+        content: "Por 3 dias, antes de comer, avalie seu nível de fome física (0-10) e anote o que está sentindo emocionalmente naquele momento."
       },
       {
         id: 602,
-        title: "Experimento de Intensidade",
-        description: "Descubra como diferentes intensidades afetam sua fome",
-        type: "diary",
+        title: "Técnica dos 5 Porquês",
+        description: "Descubra a raiz da sua fome emocional",
+        type: "form",
         xp_reward: 20,
-        content: "Experimente 3 tipos de atividade (leve, moderada, intensa) em dias diferentes. Registre como cada uma afetou seu apetite nas horas seguintes."
+        content: "Aplique a técnica dos 5 porquês a um episódio recente de fome emocional. Por exemplo: Por que quero comer este doce? Porque estou ansiosa. Por que estou ansiosa? Etc."
       },
       {
         id: 603,
-        title: "Micro-Movimentos",
-        description: "Incorpore pequenos momentos de movimento ao dia",
+        title: "Comportamentos Alternativos",
+        description: "Crie substitutos para a alimentação emocional",
         type: "form",
         xp_reward: 15,
-        content: "Crie uma lista de 5 'micro-movimentos' de 2-3 minutos que você pode fazer durante o dia e implemente-os."
+        content: "Identifique seus 3 principais gatilhos emocionais para comer e liste 3 comportamentos alternativos para cada um."
       }
     ]
   },
   {
     id: 7,
-    title: "Integração",
-    description: "Unindo todas as estratégias para resultados duradouros",
+    title: "Manutenção dos Resultados",
+    description: "Estratégias para o sucesso duradouro",
     xp_reward: 50,
     content: `
-      <h2>Integração: Construindo sua Estratégia Personalizada</h2>
-      <p>Chegamos ao passo final! Agora é hora de integrar todas as ferramentas que você aprendeu em uma estratégia personalizada e sustentável.</p>
+      <h2>Manutenção dos Resultados: Estratégias para o Sucesso Duradouro</h2>
+      <p>Agora que você tem todas as ferramentas para controlar sua fome e transformar sua relação com a comida, vamos garantir que esses resultados durem para sempre.</p>
       
-      <h3>Criando Sua Rotina Pessoal</h3>
-      <p>Uma abordagem eficaz para controlar a fome combina todos os elementos que exploramos:</p>
-      <ul>
-        <li><strong>Consciência:</strong> Identificação de gatilhos e padrões emocionais</li>
-        <li><strong>Nutrição:</strong> Alimentos que promovem saciedade natural</li>
-        <li><strong>Mindful Eating:</strong> Alimentação com atenção plena</li>
-        <li><strong>Hidratação:</strong> Água suficiente ao longo do dia</li>
-        <li><strong>Gestão de Estresse:</strong> Técnicas para momentos difíceis</li>
-        <li><strong>Movimento:</strong> Atividade física adequada ao seu perfil</li>
-      </ul>
-      
-      <h3>Plano para Recaídas</h3>
-      <p>Recaídas fazem parte do processo. O importante é como você responde a elas:</p>
+      <h3>Criando Novos Hábitos Permanentes</h3>
+      <p>Segundo estudos, são necessários em média 66 dias para formar um novo hábito automático. Para facilitar esse processo:</p>
       <ol>
-        <li>Reconheça a recaída sem julgamento</li>
-        <li>Identifique o que a desencadeou</li>
-        <li>Retorne ao plano na próxima refeição (não amanhã ou na próxima semana)</li>
-        <li>Reveja quais ferramentas podem ajudar especificamente nessa situação</li>
-        <li>Ajuste seu plano se necessário</li>
+        <li><strong>Comece com micro-hábitos:</strong> Metas tão pequenas que parecem fáceis demais
+          <ul><li>Exemplo: "Vou adicionar inulina em apenas UMA refeição por dia"</li></ul>
+        </li>
+        <li><strong>Use gatilhos já existentes:</strong> Associe o novo hábito a algo que você já faz automaticamente
+          <ul><li>Exemplo: "Depois de escovar os dentes (hábito existente), tomarei minha cápsula de espirulina (novo hábito)"</li></ul>
+        </li>
+        <li><strong>Comemore pequenas vitórias:</strong> O cérebro precisa de recompensas para solidificar hábitos
+          <ul><li>Exemplo: Após uma semana seguindo o plano, permita-se um momento especial (não alimentar!)</li></ul>
+        </li>
       </ol>
       
-      <h3>Celebre Suas Vitórias</h3>
-      <p>Reconheça seu progresso e celebre conquistas além da balança:</p>
+      <h3>Lidando com Recaídas</h3>
+      <p>Recaídas fazem parte do processo de mudança - o segredo é como você reage a elas:</p>
+      <p><strong>O que NÃO fazer após uma recaída:</strong></p>
       <ul>
-        <li>Mais energia ao longo do dia</li>
-        <li>Melhor qualidade de sono</li>
-        <li>Menos episódios de fome descontrolada</li>
-        <li>Relação mais pacífica com a comida</li>
-        <li>Escolhas alimentares intuitivas e não restritivas</li>
+        <li>Pensar "já estraguei tudo, vou continuar comendo"</li>
+        <li>Auto-crítica severa ("sou um fracasso")</li>
+        <li>Jejum compensatório no dia seguinte</li>
+      </ul>
+      <p><strong>O que fazer:</strong></p>
+      <ul>
+        <li>Praticar autocompaixão ("todos cometem erros")</li>
+        <li>Pensar em aprendizado ("o que posso aprender com essa situação?")</li>
+        <li>Voltar ao plano na próxima refeição (não no dia seguinte)</li>
       </ul>
       
-      <p>Complete os exercícios abaixo para integrar tudo o que aprendeu!</p>
+      <p>Complete os exercícios finais para consolidar sua jornada!</p>
     `,
     exercises: [
       {
