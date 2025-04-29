@@ -15,7 +15,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useApp();
   const navigate = useNavigate();
-  const { isInstallable, installApp } = usePwaInstall();
+  const { installApp } = usePwaInstall();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,6 +58,9 @@ const Login = () => {
       const installed = await installApp();
       if (installed) {
         toast.success('Aplicativo instalado com sucesso!');
+      } else {
+        // If installation didn't happen through the browser API, show instructions
+        toast.info('Para instalar o app: Use o menu do navegador e selecione "Adicionar à tela inicial".');
       }
     } catch (error) {
       console.error('Erro ao instalar o aplicativo:', error);
@@ -112,27 +115,24 @@ const Login = () => {
             </form>
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
-            {isInstallable && (
-              <Button 
-                variant="outline"
-                className="w-full border-brand-200 hover:bg-brand-50 dark:border-brand-600 dark:text-white dark:hover:bg-brand-700 dark:hover:text-white flex items-center justify-center gap-2"
-                onClick={handleInstall}
-                disabled={isLoading}
-              >
-                <Download size={18} />
-                Instalar o App
-              </Button>
-            )}
-            {!isInstallable && (
-              <Button 
-                variant="outline"
-                className="w-full border-brand-200 hover:bg-brand-50 dark:border-brand-600 dark:text-white dark:hover:bg-brand-700 dark:hover:text-white"
-                onClick={handleDemoLogin}
-                disabled={isLoading}
-              >
-                Acessar versão demo
-              </Button>
-            )}
+            <Button 
+              variant="outline"
+              className="w-full border-brand-200 hover:bg-brand-50 dark:border-brand-600 dark:text-white dark:hover:bg-brand-700 dark:hover:text-white flex items-center justify-center gap-2"
+              onClick={handleInstall}
+              disabled={isLoading}
+            >
+              <Download size={18} />
+              Instalar o App
+            </Button>
+            
+            <Button 
+              variant="ghost"
+              className="w-full text-sm text-muted-foreground hover:bg-brand-50 dark:text-gray-400 dark:hover:bg-brand-700"
+              onClick={handleDemoLogin}
+              disabled={isLoading}
+            >
+              Acessar versão demonstrativa
+            </Button>
           </CardFooter>
         </Card>
       </div>

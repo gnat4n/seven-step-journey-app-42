@@ -8,6 +8,7 @@
   "orientation": "portrait",
   "background_color": "#f3e8ff",
   "theme_color": "#9b87f5",
+  "id": "7steps-app",
   "icons": [
     {
       "src": "icons/icon-72x72.png",
@@ -99,5 +100,7 @@
   ],
   "categories": ["health", "lifestyle", "education"],
   "lang": "pt-BR",
-  "prefer_related_applications": false
+  "prefer_related_applications": false,
+  "capture_links": "existing-client-navigate",
+  "scope": "/"
 }

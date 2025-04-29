@@ -1,10 +1,20 @@
 
-const CACHE_NAME = '7steps-app-v2';
+const CACHE_NAME = '7steps-app-v3';
 const urlsToCache = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/lovable-uploads/8802b8ff-8b05-41f8-82cd-7ef9c9355371.png'
+  '/lovable-uploads/8802b8ff-8b05-41f8-82cd-7ef9c9355371.png',
+  '/icons/icon-72x72.png',
+  '/icons/icon-96x96.png',
+  '/icons/icon-128x128.png',
+  '/icons/icon-144x144.png',
+  '/icons/icon-152x152.png',
+  '/icons/icon-192x192.png',
+  '/icons/icon-384x384.png',
+  '/icons/icon-512x512.png',
+  '/icons/maskable_icon.png',
+  '/icons/maskable_icon_512.png'
 ];
 
 // Instala o service worker e cria cache
@@ -40,8 +50,8 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Estratégia de cache: Stale-While-Revalidate 
-// Usa a versão em cache primeiro, depois atualiza em segundo plano
+// Estratégia de cache: Network First com fallback para cache
+// Prioriza dados atualizados, mas funciona offline
 self.addEventListener('fetch', event => {
   // Não intercepta requisições de navegação ou API
   if (event.request.mode === 'navigate' || 
@@ -50,26 +60,23 @@ self.addEventListener('fetch', event => {
   }
 
   event.respondWith(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.match(event.request).then(cachedResponse => {
-        const fetchPromise = fetch(event.request)
-          .then(networkResponse => {
-            // Atualiza o cache se for uma resposta válida
-            if (networkResponse && networkResponse.status === 200 && 
-                networkResponse.type === 'basic') {
-              cache.put(event.request, networkResponse.clone());
-            }
-            return networkResponse;
-          })
-          .catch(() => {
-            // Falhou em buscar, tenta retornar resposta em cache
-            return cachedResponse;
-          });
-        
-        // Retorna a versão em cache primeiro (se existir)
-        return cachedResponse || fetchPromise;
-      });
-    })
+    fetch(event.request)
+      .then(response => {
+        // Se a resposta for válida, atualiza o cache
+        if (response && response.status === 200 && 
+            response.type === 'basic') {
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME)
+            .then(cache => {
+              cache.put(event.request, responseToCache);
+            });
+        }
+        return response;
+      })
+      .catch(() => {
+        // Se falhar, tenta retornar do cache
+        return caches.match(event.request);
+      })
   );
 });
 
@@ -77,5 +84,36 @@ self.addEventListener('fetch', event => {
 self.addEventListener('message', event => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
+  }
+});
+
+// Evento para lidar com notificações push
+self.addEventListener('push', event => {
+  if (event.data) {
+    const data = event.data.json();
+    const options = {
+      body: data.body,
+      icon: '/icons/icon-192x192.png',
+      badge: '/icons/badge-72x72.png',
+      vibrate: [100, 50, 100],
+      data: {
+        url: data.url || '/'
+      }
+    };
+
+    event.waitUntil(
+      self.registration.showNotification('7Steps', options)
+    );
+  }
+});
+
+// Lidar com cliques em notificações
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  
+  if (event.notification.data && event.notification.data.url) {
+    event.waitUntil(
+      clients.openWindow(event.notification.data.url)
+    );
   }
 });
