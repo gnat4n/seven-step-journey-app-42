@@ -1,6 +1,5 @@
-
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { JourneyStep, User, DiaryEntry, ShoppingItem, Recipe, Achievement } from '@/types';
+import { JourneyStep, User, DiaryEntry, ShoppingItem, Recipe, Achievement, AppState } from '@/types';
 import { toast } from '@/components/ui/sonner';
 import demoData from '@/data/demoData';
 
@@ -184,24 +183,14 @@ const mockSteps: JourneyStep[] = [
   }
 ];
 
-type AppState = {
-  isLoading: boolean;
-  currentUser: User | null;
-  steps: JourneyStep[];
-  diaryEntries: DiaryEntry[];
-  shoppingList: ShoppingItem[];
-  recipes: Recipe[];
-  achievements: Achievement[];
-};
-
 type AppAction = 
   | { type: 'SET_LOADING', payload: boolean }
   | { type: 'SET_USER', payload: User | null }
   | { type: 'ADD_XP', payload: number }
   | { type: 'COMPLETE_STEP', payload: number }
   | { type: 'UPDATE_USER', payload: User }
-  | { type: 'ADD_DIARY_ENTRY', payload: DiaryEntry }
-  | { type: 'ADD_SHOPPING_ITEM', payload: ShoppingItem }
+  | { type: 'ADD_DIARY_ENTRY', payload: Omit<DiaryEntry, 'id' | 'user_id'> }
+  | { type: 'ADD_SHOPPING_ITEM', payload: Omit<ShoppingItem, 'id'> }
   | { type: 'TOGGLE_SHOPPING_ITEM', payload: string }
   | { type: 'REMOVE_SHOPPING_ITEM', payload: string };
 
@@ -222,7 +211,7 @@ const AppContext = createContext<{
   addXP: (amount: number) => void;
   completeStep: (stepId: number) => Promise<void>;
   updateUser: (userData: User) => Promise<void>;
-  addDiaryEntry: (entry: Omit<DiaryEntry, 'id'>) => void;
+  addDiaryEntry: (entry: Omit<DiaryEntry, 'id' | 'user_id'>) => void;
   addShoppingItem: (item: Omit<ShoppingItem, 'id'>) => void;
   toggleShoppingItem: (itemId: string) => void;
   removeShoppingItem: (itemId: string) => void;
@@ -289,9 +278,10 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
     case 'UPDATE_USER':
       return { ...state, currentUser: action.payload };
     case 'ADD_DIARY_ENTRY':
-      const newEntry = { 
+      const newEntry: DiaryEntry = { 
         ...action.payload, 
-        id: `entry-${Date.now()}`
+        id: `entry-${Date.now()}`,
+        user_id: state.currentUser?.id || 'anonymous' 
       };
       
       return { 
@@ -426,8 +416,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return Promise.resolve();
   };
   
-  const addDiaryEntry = (entry: Omit<DiaryEntry, 'id'>) => {
-    dispatch({ type: 'ADD_DIARY_ENTRY', payload: entry });
+  const addDiaryEntry = (entry: Omit<DiaryEntry, 'id' | 'user_id'>) => {
+    const fullEntry: Omit<DiaryEntry, 'id'> = {
+      ...entry,
+      user_id: state.currentUser?.id || 'anonymous'
+    };
+    
+    dispatch({ type: 'ADD_DIARY_ENTRY', payload: fullEntry });
     toast.success('Entrada adicionada ao diário!');
     addXP(10); // Small XP reward for diary entries
   };

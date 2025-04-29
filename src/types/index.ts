@@ -1,3 +1,4 @@
+
 export interface User {
   id: string;
   email: string;
@@ -13,8 +14,8 @@ export interface JourneyStep {
   id: number;
   title: string;
   description: string;
-  xp_reward: number;
   content: string;
+  xp_reward?: number;
   exercises: Exercise[];
 }
 
@@ -38,6 +39,24 @@ export interface DiaryEntry {
   notes: string;
 }
 
+export interface ShoppingItem {
+  id: string;
+  name: string;
+  category: string;
+  completed: boolean;
+  createdAt: string;
+}
+
+export interface Recipe {
+  id: string;
+  title: string;
+  ingredients: string[];
+  instructions: string;
+  prepTime: string;
+  cookTime: string;
+  imageUrl?: string;
+}
+
 export interface Achievement {
   id: number;
   title: string;
@@ -56,5 +75,6 @@ export interface AppState {
   steps: JourneyStep[];
   achievements: Achievement[];
   diaryEntries: DiaryEntry[];
-  users: User[]; // For admin dashboard
+  recipes: Recipe[];
+  shoppingList: ShoppingItem[];
 }

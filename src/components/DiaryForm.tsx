@@ -1,127 +1,217 @@
 
 import React, { useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 import { useApp } from '@/context/AppContext';
-import { Emotion } from '@/types';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Slider } from '@/components/ui/slider';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
-const emotions: { value: Emotion; label: string; emoji: string }[] = [
-  { value: 'happy', label: 'Feliz', emoji: '😊' },
-  { value: 'sad', label: 'Triste', emoji: '😢' },
-  { value: 'anxious', label: 'Ansiosa', emoji: '😰' },
-  { value: 'calm', label: 'Calma', emoji: '😌' },
-  { value: 'tired', label: 'Cansada', emoji: '😴' },
-  { value: 'energetic', label: 'Energética', emoji: '⚡' },
-  { value: 'stressed', label: 'Estressada', emoji: '😤' },
-  { value: 'relaxed', label: 'Relaxada', emoji: '🧘‍♀️' },
-];
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { Textarea } from '@/components/ui/textarea';
+import { toast } from '@/components/ui/sonner';
+import { Slider } from '@/components/ui/slider';
+import { Switch } from '@/components/ui/switch';
+import { CalendarIcon } from 'lucide-react';
+
+const formSchema = z.object({
+  date: z.date(),
+  hunger_level: z.number().min(1).max(10),
+  emotional_hunger: z.boolean(),
+  feeling: z.string().min(2),
+  notes: z.string(),
+});
 
 export const DiaryForm: React.FC = () => {
   const { addDiaryEntry } = useApp();
-  const [hungerLevel, setHungerLevel] = useState<number>(5);
-  const [emotionalHunger, setEmotionalHunger] = useState<boolean>(false);
-  const [feeling, setFeeling] = useState<string>('');
-  const [notes, setNotes] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      date: new Date(),
+      hunger_level: 5,
+      emotional_hunger: false,
+      feeling: '',
+      notes: '',
+    },
+  });
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
     
-    // Validate form
-    if (!feeling) {
-      alert('Por favor, selecione como você está se sentindo.');
-      return;
+    try {
+      const formattedEntry = {
+        date: format(values.date, 'yyyy-MM-dd'),
+        hunger_level: values.hunger_level,
+        emotional_hunger: values.emotional_hunger,
+        feeling: values.feeling,
+        notes: values.notes,
+      };
+      
+      addDiaryEntry(formattedEntry);
+      form.reset();
+      toast.success("Entrada adicionada ao diário com sucesso!");
+    } catch (error) {
+      console.error("Error submitting diary entry:", error);
+      toast.error("Erro ao adicionar entrada. Tente novamente.");
+    } finally {
+      setIsSubmitting(false);
     }
-    
-    // Add diary entry
-    addDiaryEntry({
-      date: new Date().toISOString(),
-      hunger_level: hungerLevel,
-      emotional_hunger: emotionalHunger,
-      feeling,
-      notes,
-    });
-    
-    // Reset form
-    setHungerLevel(5);
-    setEmotionalHunger(false);
-    setFeeling('');
-    setNotes('');
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-md">
-      <div className="space-y-3">
-        <h3 className="text-lg font-medium">Como você está se sentindo hoje?</h3>
-        
-        <div className="space-y-1">
-          <Label>Nível de fome antes da última refeição (1-10)</Label>
-          <div className="flex items-center gap-4">
-            <Slider 
-              value={[hungerLevel]} 
-              min={1} 
-              max={10} 
-              step={1} 
-              onValueChange={(values) => setHungerLevel(values[0])}
-              className="flex-1"
-            />
-            <span className="w-8 text-center font-bold text-brand-600">{hungerLevel}</span>
-          </div>
-          <div className="flex justify-between text-xs text-muted-foreground">
-            <span>Sem fome</span>
-            <span>Extrema fome</span>
-          </div>
-        </div>
-        
-        <div className="flex items-center space-x-2">
-          <Switch 
-            id="emotional-hunger" 
-            checked={emotionalHunger}
-            onCheckedChange={setEmotionalHunger}
-          />
-          <Label htmlFor="emotional-hunger">Comi por emoção, não por fome física</Label>
-        </div>
-        
-        <div className="space-y-1">
-          <Label>Sentimento predominante hoje</Label>
-          <div className="grid grid-cols-4 gap-2 mt-1">
-            {emotions.map((emotion) => (
-              <button
-                key={emotion.value}
-                type="button"
-                className={`
-                  flex flex-col items-center justify-center p-2 rounded-lg transition-all
-                  ${feeling === emotion.value 
-                    ? 'bg-brand-200 border-2 border-brand-500' 
-                    : 'bg-gray-50 border border-gray-200 hover:bg-gray-100'
-                  }
-                `}
-                onClick={() => setFeeling(emotion.value)}
-              >
-                <span className="text-2xl mb-1">{emotion.emoji}</span>
-                <span className="text-xs">{emotion.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        <div className="space-y-1">
-          <Label htmlFor="notes">Notas do dia (opcional)</Label>
-          <Textarea
-            id="notes"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            placeholder="Como foi seu dia? O que quer lembrar?"
-            className="min-h-[100px]"
-          />
-        </div>
-      </div>
-      
-      <Button type="submit" className="w-full bg-brand-500 hover:bg-brand-600">
-        Salvar no Diário
-      </Button>
-    </form>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="date"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel>Data</FormLabel>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        'w-full pl-3 text-left font-normal',
+                        !field.value && 'text-muted-foreground'
+                      )}
+                    >
+                      {field.value ? (
+                        format(field.value, 'PPP', { locale: ptBR })
+                      ) : (
+                        <span>Selecione a data</span>
+                      )}
+                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    disabled={(date) =>
+                      date > new Date() || date < new Date('1900-01-01')
+                    }
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="hunger_level"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Nível de Fome (1-10)</FormLabel>
+              <FormControl>
+                <div className="space-y-3">
+                  <Slider
+                    min={1}
+                    max={10}
+                    step={1}
+                    defaultValue={[field.value]}
+                    onValueChange={(vals) => field.onChange(vals[0])}
+                    className="w-full"
+                  />
+                  <div className="flex justify-between text-xs text-muted-foreground">
+                    <span>Pouca fome (1)</span>
+                    <span className="font-medium text-brand-600">{field.value}</span>
+                    <span>Muita fome (10)</span>
+                  </div>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="emotional_hunger"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+              <div className="space-y-0.5">
+                <FormLabel>Fome Emocional</FormLabel>
+                <FormDescription>
+                  Você sente que esta fome é emocional e não física?
+                </FormDescription>
+              </div>
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="feeling"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Como você está se sentindo?</FormLabel>
+              <FormControl>
+                <Textarea
+                  {...field}
+                  placeholder="Descreva suas emoções agora (ex: ansioso, estressado, entediado)"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="notes"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Observações</FormLabel>
+              <FormControl>
+                <Textarea
+                  {...field}
+                  placeholder="Outras observações sobre sua fome, alimentação ou emoções do dia"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <Button 
+          type="submit" 
+          className="w-full bg-brand-600 hover:bg-brand-700" 
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Salvando...' : 'Salvar no Diário'}
+        </Button>
+      </form>
+    </Form>
   );
 };
