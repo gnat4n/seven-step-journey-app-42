@@ -5,7 +5,7 @@ import { useApp } from '@/context/AppContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { supabase } from '@/integrations/supabase/client';
-import { User } from '@/types';
+import { User, SupabaseUser } from '@/types';
 
 const Admin = () => {
   const { state } = useApp();
@@ -21,7 +21,18 @@ const Admin = () => {
         
         if (error) throw error;
         
-        setUsers(data as User[] || []);
+        // Map the Supabase user format to our application's User format
+        const mappedUsers = (data as SupabaseUser[] || []).map(dbUser => ({
+          id: dbUser.id,
+          email: dbUser.email,
+          xp_total: dbUser.xp_total,
+          current_step: dbUser.nivel_atual, // Mapping nivel_atual to current_step
+          avatar_status: dbUser.avatar_status,
+          is_admin: dbUser.admin, // Mapping admin to is_admin
+          created_at: dbUser.created_at
+        }));
+        
+        setUsers(mappedUsers);
       } catch (error) {
         console.error('Error fetching users:', error);
       } finally {

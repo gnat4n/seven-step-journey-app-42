@@ -78,3 +78,15 @@ export interface AppState {
   recipes: Recipe[];
   shoppingList: ShoppingItem[];
 }
+
+// Supabase database user type
+export interface SupabaseUser {
+  id: string;
+  email: string;
+  admin: boolean;
+  avatar_status: number;
+  created_at: string;
+  last_login: string | null;
+  nivel_atual: number;
+  xp_total: number;
+}
