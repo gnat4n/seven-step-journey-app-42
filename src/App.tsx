@@ -21,7 +21,15 @@ import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import { AuthGuard } from "./components/AuthGuard";
 
-const queryClient = new QueryClient();
+// Create a new query client with default options
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
 
 const App = () => (
   <React.StrictMode>

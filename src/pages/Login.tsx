@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { toast } from '@/components/ui/sonner';
 import { usePwaInstall } from '@/hooks/usePwaInstall';
 import { Download } from 'lucide-react';
+import { useTheme } from '@/context/ThemeContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ const Login = () => {
   const { login } = useApp();
   const navigate = useNavigate();
   const { installApp } = usePwaInstall();
+  const { theme } = useTheme();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,8 +57,8 @@ const Login = () => {
   // Handle PWA installation
   const handleInstall = async () => {
     try {
-      const installed = await installApp();
-      if (installed) {
+      const result = await installApp();
+      if (result) {
         toast.success('Aplicativo instalado com sucesso!');
       } else {
         // If installation didn't happen through the browser API, show instructions
@@ -68,12 +70,17 @@ const Login = () => {
     }
   };
 
+  // Define logo based on theme
+  const logoSrc = theme === 'dark' 
+    ? '/lovable-uploads/42a44c4e-77e3-422f-8433-baeb811966a8.png' 
+    : '/lovable-uploads/26597e5f-abeb-43e8-85af-7b6428055e3b.png';
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-brand-100/30 dark:bg-brand-800/50 px-4">
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center mb-6">
           <img 
-            src="/lovable-uploads/8802b8ff-8b05-41f8-82cd-7ef9c9355371.png" 
+            src={logoSrc}
             alt="7Steps Logo" 
             className="h-16 mb-4"
           />
@@ -123,15 +130,6 @@ const Login = () => {
             >
               <Download size={18} />
               Instalar o App
-            </Button>
-            
-            <Button 
-              variant="ghost"
-              className="w-full text-sm text-muted-foreground hover:bg-brand-50 dark:text-gray-400 dark:hover:bg-brand-700"
-              onClick={handleDemoLogin}
-              disabled={isLoading}
-            >
-              Acessar versão demonstrativa
             </Button>
           </CardFooter>
         </Card>
