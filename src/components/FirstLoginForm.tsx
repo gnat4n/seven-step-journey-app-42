@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -5,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { toast } from "@/hooks/use-toast";
+import { toast } from "@/lib/toast-helpers";
 import { useSignup } from '@/hooks/useSignup';
 
 export const FirstLoginForm: React.FC = () => {
@@ -24,6 +25,10 @@ export const FirstLoginForm: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleGenderChange = (value: string) => {
+    setFormData(prev => ({ ...prev, gender: value }));
   };
 
   const handleGoalChange = (goal: string) => {
@@ -91,28 +96,38 @@ export const FirstLoginForm: React.FC = () => {
       </div>
       <div>
         <Label>Gênero</Label>
-        <RadioGroup value={formData.gender} onValueChange={handleChange}>
+        <RadioGroup value={formData.gender} onValueChange={handleGenderChange}>
           <div className="flex space-x-4">
-            <RadioGroupItem value="male" id="male" label="Masculino" />
-            <RadioGroupItem value="female" id="female" label="Feminino" />
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="male" id="male" />
+              <Label htmlFor="male">Masculino</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="female" id="female" />
+              <Label htmlFor="female">Feminino</Label>
+            </div>
           </div>
         </RadioGroup>
       </div>
       <div>
         <Label>Objetivos</Label>
         <div className="flex space-x-4">
-          <Checkbox
-            id="goal1"
-            checked={formData.goals.includes('perder peso')}
-            onChange={() => handleGoalChange('perder peso')}
-          />
-          <Label htmlFor="goal1">Perder Peso</Label>
-          <Checkbox
-            id="goal2"
-            checked={formData.goals.includes('ganhar massa')}
-            onChange={() => handleGoalChange('ganhar massa')}
-          />
-          <Label htmlFor="goal2">Ganhar Massa</Label>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="goal1"
+              checked={formData.goals.includes('perder peso')}
+              onCheckedChange={() => handleGoalChange('perder peso')}
+            />
+            <Label htmlFor="goal1">Perder Peso</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="goal2"
+              checked={formData.goals.includes('ganhar massa')}
+              onCheckedChange={() => handleGoalChange('ganhar massa')}
+            />
+            <Label htmlFor="goal2">Ganhar Massa</Label>
+          </div>
         </div>
       </div>
       <div>
