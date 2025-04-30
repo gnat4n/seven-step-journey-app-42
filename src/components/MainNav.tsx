@@ -7,7 +7,6 @@ import { Avatar } from '@/components/Avatar';
 import { XPBar } from '@/components/XPBar';
 import { Button } from '@/components/ui/button';
 import { Moon, Sun } from 'lucide-react';
-import { Logo } from '@/components/Logo';
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -59,7 +58,15 @@ export const MainNav: React.FC = () => {
     >
       <div className="container flex h-16 items-center justify-between py-4">
         {/* Logo */}
-        <Logo size="sm" />
+        <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <img 
+              src="/lovable-uploads/8802b8ff-8b05-41f8-82cd-7ef9c9355371.png" 
+              alt="7Steps Logo" 
+              className="h-8"
+            />
+          </Link>
+        </div>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">

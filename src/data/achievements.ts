@@ -4,50 +4,50 @@ import { Achievement } from '@/types';
 export const mockAchievements: Achievement[] = [
   {
     id: 1,
-    title: "Desintoxicação Mental",
-    description: "Completou o Passo 1: Desintoxicação Mental",
+    title: "Caçadora de Gatilhos",
+    description: "Completou todos os exercícios do Passo 1",
     icon: "🧠",
     unlocked: false
   },
   {
     id: 2,
     title: "Mestre da Inulina",
-    description: "Completou o Passo 2: Poder da Inulina",
+    description: "Completou o Passo 2 + aplicou 3 receitas",
     icon: "🥬",
     unlocked: false
   },
   {
     id: 3,
-    title: "Espirulina Dominada",
-    description: "Completou o Passo 3: Segredo da Espirulina",
-    icon: "🍽️",
+    title: "Controladora da Fome",
+    description: "Passo 3 + entradas no diário por 5 dias seguidos",
+    icon: "💪",
     unlocked: false
   },
   {
     id: 4,
-    title: "Combinações Perfeitas",
-    description: "Completou o Passo 4: Combinações Poderosas",
-    icon: "💧",
+    title: "Prato Campeão",
+    description: "Criou um prato 10/10 no Passo 4",
+    icon: "🍽️",
     unlocked: false
   },
   {
     id: 5,
-    title: "Rotina Estabelecida",
-    description: "Completou o Passo 5: Rotina Realista",
-    icon: "🧘‍♀️",
+    title: "Rotina Ativada",
+    description: "Preencheu planner por 7 dias seguidos",
+    icon: "📅",
     unlocked: false
   },
   {
     id: 6,
-    title: "Emoções em Equilíbrio",
-    description: "Completou o Passo 6: Reprogramação Emocional",
-    icon: "🏃‍♀️",
+    title: "Emoções Dominadas",
+    description: "Completou todos os exercícios do Passo 6",
+    icon: "❤️",
     unlocked: false
   },
   {
     id: 7,
-    title: "Transformação Completa",
-    description: "Completou o Passo 7: Mantendo os Resultados",
+    title: "Transformada",
+    description: "Concluiu os 7 passos do programa",
     icon: "🌟",
     unlocked: false
   }

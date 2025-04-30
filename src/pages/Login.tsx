@@ -6,17 +6,16 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { toast } from '@/lib/toast-helpers';
+import { toast } from '@/components/ui/sonner';
 import { usePwaInstall } from '@/hooks/usePwaInstall';
 import { Download } from 'lucide-react';
-import { Logo } from '@/components/Logo';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useApp();
   const navigate = useNavigate();
-  const { installApp } = usePwaInstall();
+  const { isInstallable, installApp } = usePwaInstall();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,15 +38,26 @@ const Login = () => {
     }
   };
 
+  // Demo login function for testing
+  const handleDemoLogin = async () => {
+    setIsLoading(true);
+    try {
+      await login('demo@7steps.com');
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+      toast.error('Erro ao fazer login demonstrativo. Tente novamente.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // Handle PWA installation
   const handleInstall = async () => {
     try {
-      const result = await installApp();
-      if (result) {
+      const installed = await installApp();
+      if (installed) {
         toast.success('Aplicativo instalado com sucesso!');
-      } else {
-        // If installation didn't happen through the browser API, show instructions
-        toast.info('Para instalar o app: Use o menu do navegador e selecione "Adicionar à tela inicial".');
       }
     } catch (error) {
       console.error('Erro ao instalar o aplicativo:', error);
@@ -59,8 +69,12 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-brand-100/30 dark:bg-brand-800/50 px-4">
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center mb-6">
-          <Logo size="md" />
-          <h1 className="text-2xl font-serif text-brand-700 dark:text-brand-300 mt-4">Bem-vinda ao 7Steps!</h1>
+          <img 
+            src="/lovable-uploads/8802b8ff-8b05-41f8-82cd-7ef9c9355371.png" 
+            alt="7Steps Logo" 
+            className="h-16 mb-4"
+          />
+          <h1 className="text-2xl font-serif text-brand-700 dark:text-brand-300">Bem-vinda ao 7Steps!</h1>
           <p className="text-muted-foreground text-center mt-2 dark:text-gray-300">
             O método que bloqueia a fome em 7 passos
           </p>
@@ -98,15 +112,27 @@ const Login = () => {
             </form>
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
-            <Button 
-              variant="outline"
-              className="w-full border-brand-200 hover:bg-brand-50 dark:border-brand-600 dark:text-white dark:hover:bg-brand-700 dark:hover:text-white flex items-center justify-center gap-2"
-              onClick={handleInstall}
-              disabled={isLoading}
-            >
-              <Download size={18} />
-              Instalar o App
-            </Button>
+            {isInstallable && (
+              <Button 
+                variant="outline"
+                className="w-full border-brand-200 hover:bg-brand-50 dark:border-brand-600 dark:text-white dark:hover:bg-brand-700 dark:hover:text-white flex items-center justify-center gap-2"
+                onClick={handleInstall}
+                disabled={isLoading}
+              >
+                <Download size={18} />
+                Instalar o App
+              </Button>
+            )}
+            {!isInstallable && (
+              <Button 
+                variant="outline"
+                className="w-full border-brand-200 hover:bg-brand-50 dark:border-brand-600 dark:text-white dark:hover:bg-brand-700 dark:hover:text-white"
+                onClick={handleDemoLogin}
+                disabled={isLoading}
+              >
+                Acessar versão demo
+              </Button>
+            )}
           </CardFooter>
         </Card>
       </div>

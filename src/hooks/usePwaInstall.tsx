@@ -46,35 +46,20 @@ export function usePwaInstall() {
   }, []);
 
   const installApp = async () => {
-    // Se tivermos o deferredPrompt, podemos usar a API para instalar
-    if (deferredPrompt) {
-      try {
-        // Mostrar o prompt de instalação
-        await deferredPrompt.prompt();
-        
-        // Aguardar pela escolha do usuário
-        const choiceResult = await deferredPrompt.userChoice;
-        
-        // Limpar o deferredPrompt após uso
-        setDeferredPrompt(null);
-        setIsInstallable(false);
-        
-        return choiceResult.outcome === 'accepted';
-      } catch (error) {
-        console.error('Erro ao instalar PWA:', error);
-        return false;
-      }
-    } 
+    if (!deferredPrompt) return false;
+
+    // Mostrar o prompt de instalação
+    await deferredPrompt.prompt();
     
-    // Para iOS (Safari) que não suporta a API de instalação
-    // Retornamos false para que a UI possa mostrar instruções alternativas
-    return false;
+    // Aguardar pela escolha do usuário
+    const choiceResult = await deferredPrompt.userChoice;
+    
+    // Limpar o deferredPrompt após uso
+    setDeferredPrompt(null);
+    setIsInstallable(false);
+    
+    return choiceResult.outcome === 'accepted';
   };
 
-  // Retorna dados úteis sobre o estado da instalação
-  return { 
-    isInstallable, 
-    isInstalled, 
-    installApp 
-  };
+  return { isInstallable, isInstalled, installApp };
 }
