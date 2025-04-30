@@ -1,124 +1,145 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useApp } from '@/context/AppContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
-import { toast } from '@/components/ui/toast';
-import { Logo } from '@/components/Logo';
-import { motion } from 'framer-motion';
+import { Checkbox } from '@/components/ui/checkbox';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { toast } from "@/hooks/use-toast";
+import { useSignup } from '@/hooks/useSignup';
 
-export const FirstLoginForm = () => {
-  const [name, setName] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const { completeSignup } = useApp();
+export const FirstLoginForm: React.FC = () => {
   const navigate = useNavigate();
-  
+  const { completeSignup } = useSignup();
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    age: '',
+    gender: 'male',
+    goals: [] as string[],
+    height: '',
+    weight: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleGoalChange = (goal: string) => {
+    setFormData((prev) => {
+      const goals = prev.goals.includes(goal)
+        ? prev.goals.filter((g) => g !== goal)
+        : [...prev.goals, goal];
+      return { ...prev, goals };
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!name) {
-      toast({
-        title: "Nome obrigatório",
-        description: "Por favor, preencha seu nome para continuar.",
-        variant: "destructive",
-      });
+    setIsLoading(true);
+
+    const { name, age, gender, goals, height, weight } = formData;
+
+    if (!name || !age || !height || !weight) {
+      toast.error('Por favor, preencha todos os campos obrigatórios.');
+      setIsLoading(false);
       return;
     }
-    
-    setIsLoading(true);
-    
-    try {
-      await completeSignup(name);
+
+    const success = await completeSignup({
+      name,
+      age: Number(age),
+      gender,
+      goals,
+      height: Number(height),
+      weight: Number(weight),
+    });
+
+    if (success) {
+      toast.success('Cadastro completo! Bem-vindo ao 7Steps!');
       navigate('/');
-    } catch (error) {
-      console.error(error);
-      toast({
-        title: "Erro ao completar cadastro",
-        description: "Não foi possível salvar seus dados. Tente novamente.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
+    } else {
+      toast.error('Erro ao completar o cadastro. Tente novamente.');
     }
+
+    setIsLoading(false);
   };
-  
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      }
-    }
-  };
-  
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 24
-      }
-    }
-  };
-  
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-brand-100/30 dark:bg-brand-800/50 p-4">
-      <motion.div 
-        className="w-full max-w-md"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <motion.div className="flex justify-center mb-6" variants={itemVariants}>
-          <Logo size="lg" />
-        </motion.div>
-        
-        <motion.div variants={itemVariants}>
-          <Card className="border-brand-200 shadow-lg dark:border-brand-700 dark:bg-brand-800/70">
-            <CardHeader>
-              <CardTitle className="text-2xl text-center dark:text-white">Bem-vinda!</CardTitle>
-              <CardDescription className="text-center dark:text-gray-300">
-                Complete seu perfil para começar sua jornada
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="dark:text-gray-200">Como podemos te chamar?</Label>
-                  <Input
-                    id="name"
-                    placeholder="Seu nome"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="dark:bg-brand-700/50 dark:border-brand-600 dark:text-white"
-                    disabled={isLoading}
-                    autoFocus
-                  />
-                </div>
-                <Button 
-                  type="submit" 
-                  className="w-full bg-brand-500 hover:bg-brand-600 dark:bg-brand-500 dark:hover:bg-brand-600 dark:text-white"
-                  disabled={isLoading}
-                >
-                  {isLoading ? 'Processando...' : 'Começar Jornada'}
-                </Button>
-              </form>
-            </CardContent>
-            <CardFooter>
-              <p className="text-xs text-center w-full text-muted-foreground dark:text-gray-400">
-                Ao continuar, você concorda com nossa política de privacidade e termos de uso.
-              </p>
-            </CardFooter>
-          </Card>
-        </motion.div>
-      </motion.div>
-    </div>
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <Label htmlFor="name">Nome</Label>
+        <Input
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <Label htmlFor="age">Idade</Label>
+        <Input
+          id="age"
+          name="age"
+          type="number"
+          value={formData.age}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <Label>Gênero</Label>
+        <RadioGroup value={formData.gender} onValueChange={handleChange}>
+          <div className="flex space-x-4">
+            <RadioGroupItem value="male" id="male" label="Masculino" />
+            <RadioGroupItem value="female" id="female" label="Feminino" />
+          </div>
+        </RadioGroup>
+      </div>
+      <div>
+        <Label>Objetivos</Label>
+        <div className="flex space-x-4">
+          <Checkbox
+            id="goal1"
+            checked={formData.goals.includes('perder peso')}
+            onChange={() => handleGoalChange('perder peso')}
+          />
+          <Label htmlFor="goal1">Perder Peso</Label>
+          <Checkbox
+            id="goal2"
+            checked={formData.goals.includes('ganhar massa')}
+            onChange={() => handleGoalChange('ganhar massa')}
+          />
+          <Label htmlFor="goal2">Ganhar Massa</Label>
+        </div>
+      </div>
+      <div>
+        <Label htmlFor="height">Altura (cm)</Label>
+        <Input
+          id="height"
+          name="height"
+          type="number"
+          value={formData.height}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <Label htmlFor="weight">Peso (kg)</Label>
+        <Input
+          id="weight"
+          name="weight"
+          type="number"
+          value={formData.weight}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <Button type="submit" disabled={isLoading}>
+        {isLoading ? 'Carregando...' : 'Completar Cadastro'}
+      </Button>
+    </form>
   );
 };

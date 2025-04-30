@@ -13,6 +13,7 @@ interface LogoProps {
 export const Logo: React.FC<LogoProps> = ({ size = 'md', className, linkProps }) => {
   const { theme } = useTheme();
   
+  // Use the uploaded images based on theme
   const logoSrc = theme === 'dark' 
     ? '/lovable-uploads/42a44c4e-77e3-422f-8433-baeb811966a8.png' 
     : '/lovable-uploads/26597e5f-abeb-43e8-85af-7b6428055e3b.png';

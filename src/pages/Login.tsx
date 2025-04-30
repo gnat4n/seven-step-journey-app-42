@@ -6,10 +6,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { toast } from '@/components/ui/sonner';
+import { toast } from '@/hooks/use-toast';
 import { usePwaInstall } from '@/hooks/usePwaInstall';
 import { Download } from 'lucide-react';
-import { useTheme } from '@/context/ThemeContext';
+import { Logo } from '@/components/Logo';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -17,7 +17,6 @@ const Login = () => {
   const { login } = useApp();
   const navigate = useNavigate();
   const { installApp } = usePwaInstall();
-  const { theme } = useTheme();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,20 +39,6 @@ const Login = () => {
     }
   };
 
-  // Demo login function for testing
-  const handleDemoLogin = async () => {
-    setIsLoading(true);
-    try {
-      await login('demo@7steps.com');
-      navigate('/');
-    } catch (error) {
-      console.error(error);
-      toast.error('Erro ao fazer login demonstrativo. Tente novamente.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   // Handle PWA installation
   const handleInstall = async () => {
     try {
@@ -70,21 +55,12 @@ const Login = () => {
     }
   };
 
-  // Define logo based on theme
-  const logoSrc = theme === 'dark' 
-    ? '/lovable-uploads/42a44c4e-77e3-422f-8433-baeb811966a8.png' 
-    : '/lovable-uploads/26597e5f-abeb-43e8-85af-7b6428055e3b.png';
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-brand-100/30 dark:bg-brand-800/50 px-4">
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center mb-6">
-          <img 
-            src={logoSrc}
-            alt="7Steps Logo" 
-            className="h-16 mb-4"
-          />
-          <h1 className="text-2xl font-serif text-brand-700 dark:text-brand-300">Bem-vinda ao 7Steps!</h1>
+          <Logo size="md" />
+          <h1 className="text-2xl font-serif text-brand-700 dark:text-brand-300 mt-4">Bem-vinda ao 7Steps!</h1>
           <p className="text-muted-foreground text-center mt-2 dark:text-gray-300">
             O método que bloqueia a fome em 7 passos
           </p>
