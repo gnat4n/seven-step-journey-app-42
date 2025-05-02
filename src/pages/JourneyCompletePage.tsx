@@ -5,7 +5,7 @@ import { MainNav } from '@/components/MainNav';
 import { Button } from '@/components/ui/button';
 import { useApp } from '@/context/AppContext';
 import { motion } from 'framer-motion';
-import { Confetti } from 'lucide-react';
+import { Award } from 'lucide-react';
 
 const JourneyCompletePage = () => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const JourneyCompletePage = () => {
               animate={{ rotate: 360 }}
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
             >
-              <Confetti className="h-16 w-16 text-brand-500 dark:text-brand-300" />
+              <Award className="h-16 w-16 text-brand-500 dark:text-brand-300" />
             </motion.div>
           </div>
           
