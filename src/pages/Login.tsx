@@ -69,7 +69,7 @@ const Login = () => {
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center mb-6">
           <img src="/lovable-uploads/8802b8ff-8b05-41f8-82cd-7ef9c9355371.png" alt="7Steps Logo" className="h-16 mb-4" />
-          <h1 className="text-2xl font-serif text-brand-700 dark:text-brand-300">Bem-vinda ao 7Steps!</h1>
+          <h1 className="font-serif text-brand-700 dark:text-brand-300 text-2xl font-bold">Bem-vinda ao 7Steps!</h1>
           <p className="text-muted-foreground text-center mt-2 dark:text-gray-300">
             O método que bloqueia a fome em 7 passos
           </p>
