@@ -77,10 +77,10 @@ export const mockSteps: JourneyStep[] = [
     description: "Aprenda sobre nutrientes que promovem saciedade",
     xp_reward: 50,
     content: `
-      <h2>Nutrição: O Poder dos Alimentos Certos</h2>
-      <p>Agora que começamos a trabalhar sua mente, vamos falar sobre os nutrientes que podem ajudar a controlar naturalmente sua fome.</p>
+      <h2>O Poder da Inulina</h2>
+      <p>Agora que começamos a trabalhar sua mente, vamos falar sobre algo que vai revolucionar sua fisiologia: a inulina.</p>
       
-      <h3>O Poder da Inulina</h3>
+      <h3>O Que é Inulina?</h3>
       <p>A inulina é uma fibra solúvel natural encontrada em diversos vegetais. Mas não é uma fibra qualquer - ela é considerada um prebiótico funcional com superpoderes contra a fome.</p>
       <p>Diferente de outras fibras, a inulina tem uma capacidade extraordinária: quando entra em contato com água no seu estômago, forma um gel que aumenta de volume, criando uma sensação de saciedade que dura horas!</p>
       
@@ -105,7 +105,31 @@ export const mockSteps: JourneyStep[] = [
         <li>Almeirão</li>
       </ul>
       
-      <p>Complete os exercícios abaixo para dominar o uso da inulina!</p>
+      <h3>Como Usar Inulina para Máximo Benefício</h3>
+      <p><strong>Dosagem diária recomendada:</strong> 5 a 20g por dia</p>
+      <p><strong>Uso ideal:</strong> Comece com doses menores (5g/dia) e aumente gradualmente para evitar desconforto intestinal inicial (gases, inchaço).</p>
+      <p><strong>Momento perfeito:</strong> Tome 500mg de inulina pura (em pó ou suplemento) em jejum, com um copo grande de água, 30 minutos antes do café da manhã. Isso criará uma "barreira de gel" no seu estômago antes mesmo de começar o dia.</p>
+      <p><strong>Para resultados visíveis:</strong> Use por pelo menos 15 dias consecutivos.</p>
+      
+      <h4>Receita Rápida: Água de Inulina</h4>
+      <ul>
+        <li>1 colher de chá de inulina em pó (3g)</li>
+        <li>1 copo de água (200ml)</li>
+        <li>Suco de meio limão (opcional)</li>
+        <li>Misture bem e tome em jejum</li>
+      </ul>
+      
+      <h3>Outros Benefícios da Inulina</h3>
+      <p>Além de controlar sua fome, a inulina oferece:</p>
+      <ul>
+        <li>Melhora da digestão e combate à prisão de ventre</li>
+        <li>Fortalecimento do sistema imunológico</li>
+        <li>Redução do colesterol e triglicerídeos</li>
+        <li>Prevenção de doenças intestinais</li>
+        <li>Auxílio na absorção de minerais como cálcio</li>
+      </ul>
+      
+      <p><strong>ATENÇÃO:</strong> Se você tem síndrome do intestino irritável severa ou outras condições digestivas, consulte seu médico antes de aumentar significativamente seu consumo de inulina.</p>
     `,
     exercises: [
       {
