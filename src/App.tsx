@@ -12,6 +12,7 @@ import Index from "./pages/Dashboard";
 import Login from "./pages/Login";
 import FirstLogin from "./pages/FirstLogin";
 import StepPage from "./pages/StepPage";
+import StepExercisesPage from "./pages/StepExercisesPage";
 import Profile from "./pages/Profile";
 import Diary from "./pages/Diary";
 import ShoppingList from "./pages/ShoppingList";
@@ -35,6 +36,7 @@ const App = () => (
                 <Route path="/first-login" element={<FirstLogin />} />
                 <Route path="/" element={<AuthGuard><Index /></AuthGuard>} />
                 <Route path="/passo/:stepId" element={<AuthGuard><StepPage /></AuthGuard>} />
+                <Route path="/passo/:stepId/exercicios" element={<AuthGuard><StepExercisesPage /></AuthGuard>} />
                 <Route path="/perfil" element={<AuthGuard><Profile /></AuthGuard>} />
                 <Route path="/diario" element={<AuthGuard><Diary /></AuthGuard>} />
                 <Route path="/lista-compras" element={<AuthGuard><ShoppingList /></AuthGuard>} />
