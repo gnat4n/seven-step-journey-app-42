@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useApp } from '@/context/AppContext';
@@ -7,7 +6,6 @@ import { StepContent } from '@/components/StepContent';
 import { JourneyProgress } from '@/components/JourneyProgress';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
-
 const StepPage = () => {
   const {
     stepId
@@ -17,8 +15,7 @@ const StepPage = () => {
   const [loading, setLoading] = useState(true);
   const {
     state,
-    completeStep,
-    areAllExercisesCompleted
+    completeStep
   } = useApp();
   const {
     steps,
@@ -40,17 +37,14 @@ const StepPage = () => {
     }
     setLoading(false);
   }, [step, stepId, currentUser, navigate]);
-
   const handleStepComplete = async () => {
-    if (currentUser && Number(stepId) === currentUser.current_step && areAllExercisesCompleted(Number(stepId))) {
+    if (currentUser && Number(stepId) === currentUser.current_step) {
       await completeStep(Number(stepId));
     }
   };
-
   const handleNavigateToStep = (stepNumber: number) => {
     navigate(`/passo/${stepNumber}`);
   };
-
   if (loading) {
     return <div className="flex flex-col min-h-screen">
         <MainNav />
@@ -59,7 +53,6 @@ const StepPage = () => {
         </div>
       </div>;
   }
-
   if (!step) {
     return <div className="flex flex-col min-h-screen">
         <MainNav />
@@ -71,9 +64,7 @@ const StepPage = () => {
         </div>
       </div>;
   }
-  
   const stepCompleted = currentUser && currentUser.current_step > Number(stepId);
-  
   return <div className="flex flex-col min-h-screen">
       <MainNav />
       <div className="container py-8 flex-1">
@@ -101,5 +92,4 @@ const StepPage = () => {
       </div>
     </div>;
 };
-
 export default StepPage;
