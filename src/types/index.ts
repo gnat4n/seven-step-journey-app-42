@@ -68,6 +68,12 @@ export interface Achievement {
 
 export type Emotion = 'happy' | 'sad' | 'anxious' | 'calm' | 'tired' | 'energetic' | 'stressed' | 'relaxed';
 
+// Interface for tracking completed exercises
+export interface CompletedExercise {
+  stepId: number;
+  exerciseId: number;
+}
+
 // Mock database state
 export interface AppState {
   currentUser: User | null;
@@ -77,6 +83,7 @@ export interface AppState {
   diaryEntries: DiaryEntry[];
   recipes: Recipe[];
   shoppingList: ShoppingItem[];
+  completedExercises: CompletedExercise[];
 }
 
 // Supabase database user type

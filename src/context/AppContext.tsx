@@ -65,47 +65,117 @@ const mockSteps: JourneyStep[] = [
     id: 3,
     title: "Mindful Eating",
     description: "Comer com atenção plena",
-    content: "<p>Neste terceiro passo, vamos praticar o <strong>Mindful Eating</strong>, ou Alimentação Consciente, uma abordagem que nos convida a trazer total atenção para o ato de comer.</p><p>Quando comemos distraídos — assistindo TV, navegando no celular ou trabalhando — tendemos a comer mais rapidamente, não mastigamos adequadamente e frequentemente nem percebemos o quanto comemos. Isso prejudica nossa digestão e faz com que seja mais difícil reconhecer os sinais de saciedade.</p><p>Nos exercícios a seguir, você aprenderá técnicas para trazer mais consciência às suas refeições e transformar sua relação com a comida.</p>",
+    xp_reward: 50,
+    content: `
+      <h2>Mindful Eating: Comer com Atenção Plena</h2>
+      <p>Você já parou para perceber quantas vezes comemos no "piloto automático"? Mindful eating, ou alimentação consciente, é uma prática que nos traz de volta ao momento presente durante as refeições.</p>
+      
+      <h3>O Que é Mindful Eating?</h3>
+      <p>Mindful eating significa trazer consciência plena para o ato de comer. Isso envolve:</p>
+      <ul>
+        <li>Prestar total atenção à experiência de comer, momento a momento</li>
+        <li>Observar cores, texturas, sabores, aromas dos alimentos</li>
+        <li>Notar sensações físicas enquanto come: mastigação, deglutição</li>
+        <li>Perceber sinais de fome e saciedade do corpo</li>
+        <li>Identificar respostas emocionais aos alimentos</li>
+      </ul>
+      
+      <h3>Benefícios do Mindful Eating</h3>
+      <p>Estudos científicos mostram que a prática regular de mindful eating pode:</p>
+      <ol>
+        <li>Reduzir episódios de compulsão alimentar</li>
+        <li>Melhorar a digestão</li>
+        <li>Aumentar o prazer ao comer</li>
+        <li>Ajudar a reconhecer a real saciedade</li>
+        <li>Diminuir a alimentação emocional</li>
+      </ol>
+      
+      <h3>Exercício: A Refeição de 20 Minutos</h3>
+      <p>Reserve pelo menos 20 minutos para uma refeição. Desligue todas as distrações (TV, celular, computador). Concentre-se totalmente na experiência de comer:</p>
+      <ul>
+        <li>Observe o alimento antes de começar: cores, aromas, apresentação</li>
+        <li>Sinta gratidão pelo alimento e todos envolvidos em trazê-lo até você</li>
+        <li>Mastigue cada garfada pelo menos 20 vezes</li>
+        <li>Pouse os talheres entre as garfadas</li>
+        <li>Perceba os sabores mudando enquanto mastiga</li>
+      </ul>
+      
+      <p>Complete os exercícios abaixo para desenvolver sua prática de Mindful Eating!</p>
+    `,
     exercises: [
-      { 
-        id: 301, 
-        title: "Prática de Refeição Consciente", 
-        description: "Experimente uma refeição completa com atenção plena",
+      {
+        id: 301,
+        title: "O Segredo da Espirulina",
+        description: "Aprenda como este superalimento controla sua fome",
         type: "challenge",
-        content: "Escolha uma refeição do seu dia. Elimine distrações. Observe o alimento antes de comer. Sinta o aroma. Mastigue lentamente, percebendo sabores e texturas. Coloque o talher para baixo entre cada garfada. Perceba quando começar a se sentir satisfeito.",
-        xp_reward: 40
+        xp_reward: 25,
+        content: "PASSO 3: O SEGREDO DA ESPIRULINA\n\nO SUPERALIMENTO QUE DESLIGA O BOTÃO DA FOME\nEnquanto a inulina trabalha fisicamente no seu estômago, precisamos de algo que atue diretamente nos hormônios da fome. É aí que entra a espirulina - um dos superalimentos mais poderosos do planeta.\n\nO QUE É ESPIRULINA?\nA espirulina é uma microalga azul-esverdeada cultivada em água doce. Não se assuste com o nome \"alga\" - ela é consumida há séculos por diversas culturas e hoje é reconhecida mundialmente como um dos alimentos mais nutritivos que existem.\nPara ter ideia, a espirulina contém:\n• Até 70% de proteína completa (mais que qualquer alimento vegetal)\n• Todos os aminoácidos essenciais\n• Vitaminas do complexo B, vitamina E, e betacaroteno\n• Minerais como ferro, magnésio e potássio\n• Poderosos antioxidantes, incluindo ficocianina\n\nCOMO A ESPIRULINA CONTROLA SUA FOME\nA espirulina trabalha de várias formas para reduzir sua fome:\n1. Estimula a produção de hormônios de saciedade (como leptina)\n2. Fornece proteína de alta qualidadeque mantém você satisfeita por mais tempo\n3. Estabiliza os níveis de açúcar no sangue, prevenindo aquela queda que causa fome repentina\n4. Aumenta sua energiasem estimulantes, reduzindo a busca por \"combustíveis rápidos\" como açúcar\n5. Contém ácido γ-linolênico, que auxilia no metabolismo de gorduras\n\nCOMO ESCOLHER E USAR ESPIRULINA\nComo escolher: Opte por marcas certificadas, orgânicas e testadas para metais pesados. A cor deve ser verde profundo, quase azulado.\nFormas disponíveis:\n• Pó (mais versátil, pode ser adicionado a receitas)\n• Cápsulas de ModelaCaps (mais convenientes para consumo diário)\n• Flocos (menos comuns)\nDosagem recomendada: 1 a 3 gramas por dia (comece com doses menores e aumente gradualmente)\nSabor: A espirulina tem um sabor forte, semelhante a algas marinhas. Se você não está acostumada, comece com pequenas quantidades misturadas em sucos, smoothies ou iogurte.\nDICA PRÁTICA: Se o sabor for um obstáculo, as cásulas são uma excelente alternativa.\n\nCOMO INCORPORAR NA SUA ROTINA\nVersão básica: \n1/2 colher de chá de espirulina em pó misturada em um copo de suco de laranja ou água de coco.\nPara quem não gosta do sabor: \n2 cápsulas de ModelaCaps com água antes das refeições.\nPara máxima saciedade: \nCombine espirulina com inulina em um smoothie matinal:\n• 1 banana\n• 1 colher de chá de espirulina\n• 1 colher de chá de inulina\n• 1 copo de leite vegetal\n• Gelo a gosto\n\nBENEFÍCIOS ADICIONAIS DA ESPIRULINA\nAlém de controlar sua fome, a espirulina:\n• Combate anemia devido ao alto teor de ferro\n• Fortalece o sistema imunológico\n• Reduz colesterol e triglicerídeos\n• Possui potente ação anti-inflamatória\n• Combate o envelhecimento precoce graças aos antioxidantes\n\nATENÇÃO: A espirulina não é recomendada para grávidas, lactantes, pessoas com fenilcetonúria ou\ndoenças autoimunes. Se você tem alguma condição médica, consulte seu médico antes de usar.",
       },
-      { 
-        id: 302, 
-        title: "Diário de Mindful Eating", 
-        description: "Registre seus insights após praticar a alimentação consciente",
+      {
+        id: 302,
+        title: "Exercícios Práticos",
+        description: "Fixe o conteúdo sobre espirulina com exercícios práticos",
         type: "diary",
-        content: "Após cada prática de Mindful Eating, registre como foi a experiência e o que notou sobre seus hábitos alimentares.",
-        xp_reward: 30
+        xp_reward: 25,
+        content: "Exercícios práticos sobre o uso de espirulina para controlar a fome.",
       }
     ]
   },
   {
     id: 4,
     title: "Hidratação",
-    description: "A importância da água para controlar a fome",
-    content: "<p>Bem-vinda ao quarto passo da sua jornada: <strong>Hidratação</strong>. Muitas vezes confundimos sede com fome, o que pode levar a comer quando na verdade nosso corpo precisa de água.</p><p>Neste passo, você aprenderá sobre a importância da hidratação adequada não apenas para sua saúde geral, mas especificamente como uma estratégia para controlar a fome.</p><p>A água desempenha um papel crucial no metabolismo, na digestão e na regulação da temperatura corporal. Além disso, estar bem hidratada pode ajudar a reduzir desejos por comida, especialmente por doces.</p>",
+    description: "Entenda o papel da água no controle da fome",
+    xp_reward: 50,
+    content: `
+      <h2>Hidratação: O Segredo Esquecido</h2>
+      <p>Muitas vezes confundimos sede com fome. A hidratação adequada é um componente crítico para controlar a fome e manter um metabolismo saudável.</p>
+      
+      <h3>Água e Controle da Fome</h3>
+      <p>A água desempenha vários papéis fundamentais no controle da fome:</p>
+      <ul>
+        <li>Ocupa espaço no estômago, criando sensação de saciedade</li>
+        <li>Ajuda a metabolizar gordura (lipólise)</li>
+        <li>Facilita a eliminação de toxinas</li>
+        <li>Melhora a função cognitiva, ajudando em escolhas alimentares conscientes</li>
+        <li>Previne desidratação, que frequentemente é confundida com fome</li>
+      </ul>
+      
+      <h3>O Teste da Sede</h3>
+      <p>Quando sentir fome fora de hora, faça o teste da sede:</p>
+      <ol>
+        <li>Beba um copo de água (250ml)</li>
+        <li>Aguarde 15 minutos</li>
+        <li>Reavalie se ainda sente fome</li>
+      </ol>
+      <p>Em muitos casos, a sensação de fome desaparece porque o que seu corpo realmente precisava era hidratação.</p>
+      
+      <h3>Estratégias para Hidratar-se Melhor</h3>
+      <ul>
+        <li>Comece o dia com um copo de água morna com limão</li>
+        <li>Tenha sempre uma garrafa de água reutilizável com você</li>
+        <li>Configure lembretes no celular para beber água</li>
+        <li>Beba um copo de água 30 minutos antes de cada refeição</li>
+        <li>Adicione frutas, pepino ou ervas à água para dar sabor natural</li>
+      </ul>
+      
+      <p>Complete os exercícios abaixo para melhorar sua hidratação!</p>
+    `,
     exercises: [
-      { 
-        id: 401, 
-        title: "Desafio de Hidratação", 
-        description: "Aumente seu consumo de água por 3 dias",
+      {
+        id: 401,
+        title: "COMBINAÇÕES PODEROSAS",
+        description: "Aprenda como combinar a Inulina e Espirulina nas suas refeições",
         type: "challenge",
-        content: "Calcule sua necessidade diária de água (cerca de 30ml por kg de peso). Prepare uma garrafa reutilizável. Estabeleça horários regulares para beber água. Monitore seu consumo ao longo do dia. Observe como se sente em relação à fome.",
-        xp_reward: 35
+        xp_reward: 25,
+        content: "PASSO 4: COMBINAÇÕES PODEROSAS\n\nREFEIÇÕES QUE MANTÊM A FOME LONGE POR HORAS\nAgora que você conhece os dois superpoderes contra a fome - inulina e espirulina - vamos aprender a combiná-los com outros alimentos para criar refeições que mantenham a fome longe por horas.\n\nO PRINCÍPIO DO PRATO EQUILIBRADO\nO segredo para uma saciedade duradoura está na combinação certa de:\n• Proteínas: São o nutriente mais saciante e mantêm a fome longe por mais tempo\n• Fibras: Ocupam espaço no estômago e retardam a digestão\n• Gorduras saudáveis: Desaceleram a digestão e enviam sinais de saciedade ao cérebro\n• Água: Muitas vezes confundimos sede com fome\nA proporção ideal para máxima saciedade é:\n• 1/2 do prato: vegetais ricos em fibras\n• 1/4 do prato: proteínas de qualidade\n• 1/4 do prato: carboidratos complexos ricos em fibras\n• 1 colher de sobremesa de gorduras saudáveis\n\nDICA IMPORTANTE: Antes de cada refeição, beba um copo de água. Isso já ocupa parte do seu\nestômago e evita que você confunda sede com fome.\n\n5 CAFÉS DA MANHÃ QUE BLOQUEIAM A FOME\n1. Super Bowl de Aveia\n• 1/3 xícara de aveia em flocos\n• 1 colher de chá de inulina em pó\n• 1 colher de chá de chia\n• 1 colher de sopa de iogurte natural\n• 1/2 banana em rodelas\n• Canela a gosto\n2. Omelete Nutritiva\n• 2 ovos\n• Folhas verdes refogadas com alho (fonte de inulina)\n• 1/2 tomate picado\n• 1 colher de chá de espirulina misturada no ovo (ou em cápsula junto com a refeição)\n3. Smoothie Bloqueador\n• 1 banana verde (rica em inulina)\n• 1 colher de sopa de pasta de amendoim (sem açúcar)\n• 1 colher de chá de espirulina\n• 1 copo de leite vegetal\n• 1 colher de chá de chia (opcional)\n4. Torrada Power\n• 2 fatias de pão integral\n• 1/2 abacate amassado\n• 1 ovo cozido fatiado\n• 1 colher de chá de sementes de linhaça\n• Tomar 2 cápsulas de ModelaCaps junto\n5. Iogurte Especial\n• 1 pote de iogurte grego natural (sem açúcar)\n• 1 colher de sopa de granola sem açúcar\n• 1 colher de chá de inulina em pó\n• Frutas vermelhas a gosto\n• 1 colher de chá de mel (opcional)\n\n5 LANCHES RÁPIDOS PARA MOMENTOS CRÍTICOS\n1. Mix Emergencial\n• 1 punhado de castanhas (20g)\n• 1 quadrado pequeno de chocolate 70% cacau\n• 2 cápsulas de ModelaCaps para tomar junto\n2. Wrap Express\n• 1 wrap pequeno integral\n• 1 colher de sopa de homus\n• Cenoura ralada e pepino\n• Polvilhar leve camada de espirulina em pó\n3. Smoothie Instantâneo\n• 1 copo de água de coco\n• 1 colher de chá de espirulina\n• 1 colher de chá de inulina\n• Gelo\n• Bater por 30 segundos\n4. Ovos Express\n• 2 ovos cozidos\n• Pitada de sal e pimenta\n• 1 xícara de vegetais crus\n• 2 cápsulas de ModelaCaps para tomar junto\n5. Xícara da Saciedade\n• 1 maçã média picada\n• 1 colher de chá de canela\n• 1 colher de sopa de pasta de amendoim\n• 2 cápsulas de ModelaCaps para tomar junto\n\n5 JANTARES PRÁTICOS PARA DIAS CORRIDOS\n1. Bowl de Proteína\n• 100g de frango ou tofu grelhado\n• Mix de vegetais salteados com alho e cebola (fontes de inulina)\n• 1/3 xícara de quinoa cozida\n• 1/2 abacate\n• 1 colher de chá de espirulina misturada em 1 colher de sopa de azeite como molho\n2. Sopa Rápida\n• 1 tablete de caldo de legumes\n• 1 cenoura picada\n• 1 cebola picada (rica em inulina)\n• 100g de frango desfiado ou lentilhas\n• Verduras a gosto\n• 1 colher de chá de espirulina adicionada no final\n3. Prato Único\n• 1 batata doce média assada\n• 100g de carne magra ou peixe\n• Salada de folhas verdes\n• 1 colher de chá de inulina misturada em 1 colher de sopa de azeite como molho\n4. Omelete Completa\n• 3 ovos\n• Espinafre, cebola (rica em inulina) e tomate\n• 30g de queijo magro ralado\n• 1 fatia de pão integral\n• 1 colher de chá de espirulina misturada nos ovos\n5. Salada Proteica\n• Folhas verdes variadas\n• 100g de atum ou grão-de-bico\n• 1/4 de abacate\n• Cebola roxa fatiada (rica em inulina)\n• 1 ovo cozido\n• 1 colher de chá de espirulina misturada no molho de limão e azeite",
       },
-      { 
-        id: 402, 
-        title: "Reflexão sobre Hidratação", 
-        description: "Registre os efeitos da hidratação adequada",
-        type: "form",
-        content: "Como a hidratação adequada afetou sua fome e desejos por comida?",
-        xp_reward: 25
+      {
+        id: 402,
+        title: "Exercícios Práticos",
+        description: "Exercícios para fixar o conteúdo sobre combinações poderosas",
+        type: "diary",
+        xp_reward: 25,
+        content: "Exercícios práticos sobre como combinar inulina e espirulina nas refeições.",
       }
     ]
   },
@@ -192,7 +262,8 @@ type AppAction =
   | { type: 'ADD_DIARY_ENTRY', payload: Omit<DiaryEntry, 'id' | 'user_id'> }
   | { type: 'ADD_SHOPPING_ITEM', payload: Omit<ShoppingItem, 'id'> }
   | { type: 'TOGGLE_SHOPPING_ITEM', payload: string }
-  | { type: 'REMOVE_SHOPPING_ITEM', payload: string };
+  | { type: 'REMOVE_SHOPPING_ITEM', payload: string }
+  | { type: 'COMPLETE_EXERCISE', payload: { stepId: number, exerciseId: number } };
 
 const initialState: AppState = {
   isLoading: true,
@@ -202,6 +273,7 @@ const initialState: AppState = {
   shoppingList: [],
   recipes: [],
   achievements: [],
+  completedExercises: [],
 };
 
 const AppContext = createContext<{
@@ -215,6 +287,9 @@ const AppContext = createContext<{
   addShoppingItem: (item: Omit<ShoppingItem, 'id'>) => void;
   toggleShoppingItem: (itemId: string) => void;
   removeShoppingItem: (itemId: string) => void;
+  completeExercise: (stepId: number, exerciseId: number) => void;
+  isExerciseCompleted: (stepId: number, exerciseId: number) => boolean;
+  areAllExercisesCompleted: (stepId: number) => boolean;
 }>({
   state: initialState,
   login: async () => {},
@@ -226,6 +301,9 @@ const AppContext = createContext<{
   addShoppingItem: () => {},
   toggleShoppingItem: () => {},
   removeShoppingItem: () => {},
+  completeExercise: () => {},
+  isExerciseCompleted: () => false,
+  areAllExercisesCompleted: () => false,
 });
 
 const appReducer = (state: AppState, action: AppAction): AppState => {
@@ -312,6 +390,23 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         ...state,
         shoppingList: state.shoppingList.filter(item => item.id !== action.payload)
       };
+    case 'COMPLETE_EXERCISE':
+      // Check if exercise is already marked as completed
+      const alreadyCompleted = state.completedExercises.some(
+        ex => ex.stepId === action.payload.stepId && ex.exerciseId === action.payload.exerciseId
+      );
+      
+      if (alreadyCompleted) {
+        return state;
+      }
+      
+      return {
+        ...state,
+        completedExercises: [
+          ...state.completedExercises,
+          { stepId: action.payload.stepId, exerciseId: action.payload.exerciseId }
+        ]
+      };
     default:
       return state;
   }
@@ -349,6 +444,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             const shoppingList = JSON.parse(storedShoppingList);
             // We would dispatch this shopping list to state
           }
+          
+          // Load completed exercises
+          const storedCompletedExercises = localStorage.getItem('completedExercises');
+          if (storedCompletedExercises) {
+            try {
+              const completedExercises = JSON.parse(storedCompletedExercises);
+              state.completedExercises = completedExercises;
+            } catch (e) {
+              console.error('Error loading completed exercises:', e);
+            }
+          }
         } else {
           // For demo purposes, no need to show this toast
           // toast.info("Nenhum usuário encontrado. Faça login para começar.");
@@ -370,6 +476,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       localStorage.setItem('user', JSON.stringify(state.currentUser));
     }
   }, [state.currentUser]);
+  
+  // Save completed exercises to localStorage when they change
+  useEffect(() => {
+    localStorage.setItem('completedExercises', JSON.stringify(state.completedExercises));
+  }, [state.completedExercises]);
   
   const login = async (email: string) => {
     dispatch({ type: 'SET_LOADING', payload: true });
@@ -457,6 +568,50 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     toast.success('Item removido da lista de compras!');
   };
   
+  // Functions for tracking exercise completion
+  const completeExercise = (stepId: number, exerciseId: number) => {
+    dispatch({ 
+      type: 'COMPLETE_EXERCISE', 
+      payload: { stepId, exerciseId } 
+    });
+    
+    // Award XP for completing the exercise
+    const step = state.steps.find(s => s.id === stepId);
+    const exercise = step?.exercises.find(e => e.id === exerciseId);
+    
+    if (exercise?.xp_reward) {
+      addXP(exercise.xp_reward);
+      toast.success(`Exercício concluído! +${exercise.xp_reward} XP`);
+    } else {
+      toast.success('Exercício concluído!');
+    }
+    
+    // Check if all exercises for the step are completed
+    const allCompleted = areAllExercisesCompleted(stepId);
+    
+    if (allCompleted && state.currentUser && stepId === state.currentUser.current_step) {
+      // If all exercises are completed and this is the current step, auto-complete the step
+      setTimeout(() => {
+        completeStep(stepId);
+      }, 1000);
+    }
+  };
+  
+  const isExerciseCompleted = (stepId: number, exerciseId: number): boolean => {
+    return state.completedExercises.some(
+      ex => ex.stepId === stepId && ex.exerciseId === exerciseId
+    );
+  };
+  
+  const areAllExercisesCompleted = (stepId: number): boolean => {
+    const step = state.steps.find(s => s.id === stepId);
+    if (!step || !step.exercises.length) return false;
+    
+    return step.exercises.every(exercise => 
+      isExerciseCompleted(stepId, exercise.id)
+    );
+  };
+  
   return (
     <AppContext.Provider
       value={{
@@ -469,7 +624,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         addDiaryEntry,
         addShoppingItem,
         toggleShoppingItem,
-        removeShoppingItem
+        removeShoppingItem,
+        completeExercise,
+        isExerciseCompleted,
+        areAllExercisesCompleted
       }}
     >
       {children}
