@@ -39,7 +39,7 @@ export const XPBar: React.FC<XPBarProps> = ({
         <span className="text-brand-600 font-bold">{level}</span>
       </div>;
   }
-  return <div className="w-full max-w-md mx-[160px]">
+  return <div className="w-full max-w-md mx">
       <div className="flex justify-between items-center mb-1">
         <span className="text-sm font-medium">Nível {level}</span>
         <span className="text-xs text-muted-foreground">{currentXP} XP</span>
