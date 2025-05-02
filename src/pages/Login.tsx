@@ -78,9 +78,7 @@ const Login = () => {
         <Card className="border-brand-200 shadow-md dark:border-brand-700 dark:bg-brand-800/70">
           <CardHeader className="space-y-1">
             <CardTitle className="text-xl text-center dark:text-white">Entrar</CardTitle>
-            <CardDescription className="text-center dark:text-gray-300">
-              Entre com seu e-mail para acessar sua conta
-            </CardDescription>
+            <CardDescription className="text-center dark:text-gray-300">Entre com seu e-mail de compra</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
