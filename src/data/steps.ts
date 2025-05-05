@@ -1,4 +1,3 @@
-
 import { JourneyStep } from '@/types';
 
 export const mockSteps: JourneyStep[] = [
@@ -69,7 +68,8 @@ export const mockSteps: JourneyStep[] = [
         xp_reward: 15,
         content: "Identifique um pensamento automático que você tem sobre comida e crie uma reprogramação positiva."
       }
-    ]
+    ],
+    modules: []
   },
   {
     id: 2,
@@ -150,13 +150,14 @@ export const mockSteps: JourneyStep[] = [
       },
       {
         id: 203,
-        title: "Diário da Inulina",
+ title: "Diário da Inulina",
         description: "Registre como se sente após usar inulina",
         type: "diary",
         xp_reward: 15,
         content: "Registre como você se sentiu após consumir inulina por 3 dias consecutivos."
       }
-    ]
+    ],
+    modules: []
   },
   {
     id: 3,
@@ -223,6 +224,89 @@ export const mockSteps: JourneyStep[] = [
         type: "form",
         xp_reward: 15,
         content: "Antes de cada refeição principal, avalie sua fome em uma escala de 1 a 10. Coma até chegar ao nível 7 (confortavelmente satisfeita, não cheia). Registre sua experiência."
+      }
+    ],
+    modules: [
+      {
+        id: "espirulina",
+        title: "O Segredo da Espirulina",
+        description: "Aprenda como este superalimento controla sua fome",
+        type: "content",
+        xp_reward: 25,
+        content: `
+          <h1 class="text-3xl font-bold mb-6 text-brand-700 dark:text-brand-300">PASSO 3: O SEGREDO DA ESPIRULINA</h1>
+
+          <h2 class="text-2xl font-bold mb-4 text-brand-600 dark:text-brand-200">O SUPERALIMENTO QUE DESLIGA O BOTÃO DA FOME</h2>
+          <p class="mb-6">Enquanto a inulina trabalha fisicamente no seu estômago, precisamos de algo que atue diretamente nos hormônios da fome. É aí que entra a espirulina - um dos superalimentos mais poderosos do planeta.</p>
+          
+          <h3 class="text-xl font-bold mb-3 text-brand-600 dark:text-brand-200">O QUE É ESPIRULINA?</h3>
+          <p class="mb-4">A espirulina é uma microalga azul-esverdeada cultivada em água doce. Não se assuste com o nome "alga" - ela é consumida há séculos por diversas culturas e hoje é reconhecida mundialmente como um dos alimentos mais nutritivos que existem.</p>
+          <p class="mb-4">Para ter ideia, a espirulina contém:</p>
+          <ul class="list-disc pl-6 mb-6 space-y-1">
+            <li>Até 70% de proteína completa (mais que qualquer alimento vegetal)</li>
+            <li>Todos os aminoácidos essenciais</li>
+            <li>Vitaminas do complexo B, vitamina E, e betacaroteno</li>
+            <li>Minerais como ferro, magnésio e potássio</li>
+            <li>Poderosos antioxidantes, incluindo ficocianina</li>
+          </ul>
+          
+          <h3 class="text-xl font-bold mb-3 text-brand-600 dark:text-brand-200">COMO A ESPIRULINA CONTROLA SUA FOME</h3>
+          <p class="mb-4">A espirulina trabalha de várias formas para reduzir sua fome:</p>
+          <ol class="list-decimal pl-6 mb-6 space-y-1">
+            <li>Estimula a produção de hormônios de saciedade (como leptina)</li>
+            <li>Fornece proteína de alta qualidade que mantém você satisfeita por mais tempo</li>
+            <li>Estabiliza os níveis de açúcar no sangue, prevenindo aquela queda que causa fome repentina</li>
+            <li>Aumenta sua energia sem estimulantes, reduzindo a busca por "combustíveis rápidos" como açúcar</li>
+            <li>Contém ácido γ-linolênico, que auxilia no metabolismo de gorduras</li>
+          </ol>
+          
+          <h3 class="text-xl font-bold mb-3 text-brand-600 dark:text-brand-200">COMO ESCOLHER E USAR ESPIRULINA</h3>
+          <p class="mb-2"><strong>Como escolher:</strong> Opte por marcas certificadas, orgânicas e testadas para metais pesados. A cor deve ser verde profundo, quase azulado.</p>
+          <p class="mb-2"><strong>Formas disponíveis:</strong></p>
+          <ul class="list-disc pl-6 mb-4 space-y-1">
+            <li>Pó (mais versátil, pode ser adicionado a receitas)</li>
+            <li>Cápsulas de ModelaCaps (mais convenientes para consumo diário)</li>
+            <li>Flocos (menos comuns)</li>
+          </ul>
+          <p class="mb-2"><strong>Dosagem recomendada:</strong> 1 a 3 gramas por dia (comece com doses menores e aumente gradualmente)</p>
+          <p class="mb-2"><strong>Sabor:</strong> A espirulina tem um sabor forte, semelhante a algas marinhas. Se você não está acostumada, comece com pequenas quantidades misturadas em sucos, smoothies ou iogurte.</p>
+          <p class="mb-6"><strong>DICA PRÁTICA:</strong> Se o sabor for um obstáculo, as cápsulas são uma excelente alternativa.</p>
+          
+          <h3 class="text-xl font-bold mb-3 text-brand-600 dark:text-brand-200">COMO INCORPORAR NA SUA ROTINA</h3>
+          <p class="mb-2"><strong>Versão básica:</strong> 1/2 colher de chá de espirulina em pó misturada em um copo de suco de laranja ou água de coco.</p>
+          <p class="mb-2"><strong>Para quem não gosta do sabor:</strong> 2 cápsulas de ModelaCaps com água antes das refeições.</p>
+          <p class="mb-2"><strong>Para máxima saciedade:</strong> Combine espirulina com inulina em um smoothie matinal:</p>
+          <ul class="list-disc pl-6 mb-6 space-y-1">
+            <li>1 banana</li>
+            <li>1 colher de chá de espirulina</li>
+            <li>1 colher de chá de inulina</li>
+            <li>1 copo de leite vegetal</li>
+            <li>Gelo a gosto</li>
+          </ul>
+          
+          <h3 class="text-xl font-bold mb-3 text-brand-600 dark:text-brand-200">BENEFÍCIOS ADICIONAIS DA ESPIRULINA</h3>
+          <p class="mb-4">Além de controlar sua fome, a espirulina:</p>
+          <ul class="list-disc pl-6 mb-6 space-y-1">
+            <li>Combate anemia devido ao alto teor de ferro</li>
+            <li>Fortalece o sistema imunológico</li>
+            <li>Reduz colesterol e triglicerídeos</li>
+            <li>Possui potente ação anti-inflamatória</li>
+            <li>Combate o envelhecimento precoce graças aos antioxidantes</li>
+          </ul>
+          
+          <div class="p-4 border border-yellow-400 bg-yellow-50 rounded-md dark:bg-yellow-900/30 dark:border-yellow-700 mb-6">
+            <p class="font-bold text-yellow-800 dark:text-yellow-300">ATENÇÃO:</p>
+            <p class="text-yellow-700 dark:text-yellow-200">A espirulina não é recomendada para grávidas, lactantes, pessoas com fenilcetonúria ou doenças autoimunes. Se você tem alguma condição médica, consulte seu médico antes de usar.</p>
+          </div>
+        `
+      },
+      {
+        id: "espirulina_exercicios",
+        title: "Exercícios Práticos",
+        description: "Exercícios para fixar o conteúdo sobre espirulina",
+        type: "exercises",
+        xp_reward: 25,
+        content: `Exercícios sobre o uso da espirulina para controlar a fome.`
       }
     ]
   },

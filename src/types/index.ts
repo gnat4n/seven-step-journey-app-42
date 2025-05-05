@@ -8,6 +8,7 @@ export interface User {
   avatar_status: number;
   is_admin: boolean;
   created_at: string;
+  completed_modules?: string[]; // IDs dos módulos concluídos
 }
 
 export interface JourneyStep {
@@ -17,6 +18,16 @@ export interface JourneyStep {
   content: string;
   xp_reward?: number;
   exercises: Exercise[];
+  modules?: StepModule[]; // Novos módulos dentro dos passos
+}
+
+export interface StepModule {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  type: 'content' | 'exercises';
+  xp_reward: number;
 }
 
 export interface Exercise {

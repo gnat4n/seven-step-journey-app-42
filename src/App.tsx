@@ -1,4 +1,5 @@
 
+
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -13,6 +14,8 @@ import Login from "./pages/Login";
 import FirstLogin from "./pages/FirstLogin";
 import StepPage from "./pages/StepPage";
 import StepExercisesPage from "./pages/StepExercisesPage";
+import ModulePage from "./pages/ModulePage";
+import ModuleExercisesPage from "./pages/ModuleExercisesPage";
 import Profile from "./pages/Profile";
 import Diary from "./pages/Diary";
 import ShoppingList from "./pages/ShoppingList";
@@ -37,6 +40,8 @@ const App = () => (
                 <Route path="/" element={<AuthGuard><Index /></AuthGuard>} />
                 <Route path="/passo/:stepId" element={<AuthGuard><StepPage /></AuthGuard>} />
                 <Route path="/passo/:stepId/exercicios" element={<AuthGuard><StepExercisesPage /></AuthGuard>} />
+                <Route path="/passo/:stepId/modulo/:moduleId" element={<AuthGuard><ModulePage /></AuthGuard>} />
+                <Route path="/passo/:stepId/exercicios/:moduleId" element={<AuthGuard><ModuleExercisesPage /></AuthGuard>} />
                 <Route path="/perfil" element={<AuthGuard><Profile /></AuthGuard>} />
                 <Route path="/diario" element={<AuthGuard><Diary /></AuthGuard>} />
                 <Route path="/lista-compras" element={<AuthGuard><ShoppingList /></AuthGuard>} />
@@ -57,3 +62,4 @@ const App = () => (
 );
 
 export default App;
+
